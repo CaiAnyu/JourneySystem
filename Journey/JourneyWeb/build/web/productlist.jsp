@@ -1,6 +1,6 @@
 <%-- 
-    Document   : userdetail
-    Created on : 2018-7-1, 21:06:36
+    Document   : sightlist
+    Created on : 2018-7-1, 21:03:42
     Author     : 78288
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>用户中心</h1>
-    
+        <h1>产品列表</h1>
+               <%=session.getAttribute("list")%>
     </body>
 </html>

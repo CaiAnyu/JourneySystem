@@ -22,5 +22,29 @@ public interface webBeanLocal {
     boolean register(String username, String password);
 
     String test();
+
+    String showhotel(int n);
+
+    String getusername();
+
+    String showjourney(int n);
+
+    void clear();
+
+    String searchjourneyforlist(String type, String key);
+
+    boolean userbuyjourney(String n);
+
+    String searchticketforlist(String start, String terminal, String type);
+
+    boolean userbuyticket(String n);
+
+    String showdetail(String key);
+
+    String showcomment(String key);
+
+    boolean comment(String key,String comment);
+
+    boolean useraddjourneytofavourite(String n);
     
 }

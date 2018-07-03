@@ -59,6 +59,9 @@ public class CtrlServlet extends HttpServlet {
                 } else {                                                        //用户
                     if (this.webBean.userlogin(request.getParameter("username"), request.getParameter("password")) == true) {
                         session.setAttribute("loginfalse", "true");
+                        session.setAttribute("username", this.webBean.getusername());
+                        session.setAttribute("showhotel", this.webBean.showhotel(1));
+                        session.setAttribute("showjourney", this.webBean.showjourney(1));
                         RequestDispatcher disp = request.getRequestDispatcher("userindex.jsp");
                         disp.forward(request, response);
                     } else {
@@ -73,6 +76,65 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
 
+            if (new String(request.getParameter("method")).equals("relogin")) {
+                this.webBean.clear();
+                RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("userindextodetail")) {
+                RequestDispatcher disp = request.getRequestDispatcher("userdetail.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("usersearch")) {//搜产品
+                session.setAttribute("list", this.webBean.searchjourneyforlist(new String(request.getParameter("select").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("key").getBytes("iso-8859-1"), "utf-8")));
+                //  session.setAttribute("list", this.webBean.test());
+                RequestDispatcher disp = request.getRequestDispatcher("productlist.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("usersearchticket")) {//搜票
+                session.setAttribute("list",this.webBean.searchticketforlist(new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("select").getBytes("iso-8859-1"), "utf-8")));
+                RequestDispatcher disp = request.getRequestDispatcher("productlist.jsp");
+                     disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("journeyaddcart")) {//买产品
+                //out.println(this.webBean.test());
+                 String key=(String)session.getAttribute("detailkey");
+                out.println(this.webBean.userbuyjourney(key));
+              RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("journeyaddfavourite")) {//收藏产品
+                //out.println(this.webBean.test());
+                 String key=(String)session.getAttribute("detailkey");
+                out.println(this.webBean.useraddjourneytofavourite(key));
+               RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("ticketaddcart")) {//买票
+              // out.println(this.webBean.test());
+                out.println(this.webBean.userbuyticket(request.getParameter("num")));
+                RequestDispatcher disp = request.getRequestDispatcher("productlist.jsp");
+                disp.forward(request, response);
+            }
+             if (new String(request.getParameter("method")).equals("listproductdetail")) {//看详细信息
+              // out.println(this.webBean.test());
+                String key=request.getParameter("num");
+                session.setAttribute("detailkey", key);
+                 session.setAttribute("productdetail", this.webBean.showdetail(key));
+                 session.setAttribute("productcomment", this.webBean.showcomment(key));
+               
+             RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
+               disp.forward(request, response);
+            }
+             if (new String(request.getParameter("method")).equals("comment")) {//评论
+                   String key=(String)session.getAttribute("detailkey");
+                //   out.println(key+new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
+               this.webBean.comment(key,new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
+            //    out.println(this.webBean.userbuyticket(request.getParameter("num")));
+               RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
+                disp.forward(request, response);
+            }
+
             if (new String(request.getParameter("method")).equals("register")) {//注册
                 String name = request.getParameter("username");
                 String password = request.getParameter("password");
@@ -83,7 +145,7 @@ public class CtrlServlet extends HttpServlet {
                     disp.forward(request, response);
                 }
                 if (password.equals(repassword)) {
-                  //   out.println(this.webBean.test());
+                    //   out.println(this.webBean.test());
                     if (this.webBean.register(name, password)) {
                         session.setAttribute("registerfalse", "true");
                         RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
@@ -99,6 +161,7 @@ public class CtrlServlet extends HttpServlet {
                     disp.forward(request, response);
                 }
             }
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

@@ -14,11 +14,12 @@
     <body>
         <h1>登录</h1>
         <FORM METHOD="post" ACTION=CtrlServlet?method=login>    
-            用户名<input type="text" name="username"><p>
-            密码  <input type="password" name="password"><p>
+            用户名<input type="text" name="username" value="wwwww"><p>
+            密码  <input type="password" name="password" value="11111111"><p>
             <INPUT type="radio" name="r" value="1">管理员<p>
             <INPUT type="radio" name="r" value="2">用户<p>
             <input type="submit" name="s1" value="登录">
+
         </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=logintoregister>    
             <input type="submit" name="s2" value="注册">
