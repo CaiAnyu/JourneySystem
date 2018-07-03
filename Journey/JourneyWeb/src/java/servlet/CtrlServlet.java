@@ -83,7 +83,7 @@ public class CtrlServlet extends HttpServlet {
                     disp.forward(request, response);
                 }
                 if (password.equals(repassword)) {
-                   //    out.println(this.webBean.test());
+                  //   out.println(this.webBean.test());
                     if (this.webBean.register(name, password)) {
                         session.setAttribute("registerfalse", "true");
                         RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
