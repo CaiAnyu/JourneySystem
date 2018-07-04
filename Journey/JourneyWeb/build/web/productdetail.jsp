@@ -25,6 +25,11 @@
         <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddfavourite>    
                 <input type="submit" name="s" value="收藏">
         </FORM>
-
+        <FORM METHOD="post" ACTION=CtrlServlet?method=touserindex>    
+            <input type="submit" name="a" value="返回个人主页">
+        </FORM>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="返回首页">
+        </FORM>
     </body>
 </html>

@@ -15,10 +15,7 @@
         <h1>你好，<%=session.getAttribute("username")%></h1>
         <%=session.getAttribute("showhotel")%>
         <%=session.getAttribute("showjourney")%>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=relogin>    
-            <input type="submit" name="s1" value="注销">
-        </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=userindextodetail>    
+        <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
             <input type="submit" name="s2" value="个人中心">
         </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=usersearch>    
@@ -37,6 +34,9 @@
             始发地<input type="text" name="start"><p>
             目的地<input type="text" name="terminal"><p>
             <input type="submit" name="s4" value="搜索">
+        </FORM>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="返回首页">
         </FORM>
     </body>
 </html>

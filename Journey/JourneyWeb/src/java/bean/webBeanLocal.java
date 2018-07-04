@@ -46,5 +46,27 @@ public interface webBeanLocal {
     boolean comment(String key,String comment);
 
     boolean useraddjourneytofavourite(String n);
+
+    boolean repassword(String newpassword);
+
+    String showjourneycart();
+
+    boolean journeypay(String key);
+
+    boolean journeydel(String key);
+
+    String showticketcart();
+
+    boolean ticketpay(String key);
+
+    boolean ticketdel(String key);
+
+    String showjourneyorder();
+
+    String showticketorder();
+
+    String showfavourite();
+
+    boolean favdel(String key);
     
 }
