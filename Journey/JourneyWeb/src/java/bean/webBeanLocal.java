@@ -80,5 +80,17 @@ public interface webBeanLocal {
     boolean ticketon(String key);
 
     boolean ticketoff(String key);
+
+    String showallcomment();
+
+    boolean deletecomment(String key);
+
+    String showusercomment(String key);
+
+    String showuserproduct(String key);
+
+    String showuserticket(String key);
+
+    String showuser();
     
 }

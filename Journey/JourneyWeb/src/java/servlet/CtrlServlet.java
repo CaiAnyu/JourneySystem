@@ -265,18 +265,74 @@ public class CtrlServlet extends HttpServlet {
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }
-              if (new String(request.getParameter("method")).equals("ticketoff")) {//票务下架
+            if (new String(request.getParameter("method")).equals("ticketoff")) {//票务下架
                 String key = request.getParameter("num");
-               out.println(this.webBean.ticketoff(key));
-               // out.println(this.webBean.test());
+                out.println(this.webBean.ticketoff(key));
+                // out.println(this.webBean.test());
                 session.setAttribute("adminindexinf", this.webBean.showallticketlist());
-               RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("ticketon")) {//票务上架
                 String key = request.getParameter("num");
                 out.println(this.webBean.ticketon(key));
                 session.setAttribute("adminindexinf", this.webBean.showallticketlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("seecomment")) {//查看评论
+                session.setAttribute("adminindexinf", this.webBean.showallcomment());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("deletecomment")) {//删除评论
+                String key = request.getParameter("num");
+                out.println(key + this.webBean.deletecomment(key));
+                session.setAttribute("adminindexinf", this.webBean.showallcomment());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("adminsearch")) {//管理员搜索
+                String select = (String) request.getParameter("select");
+                String key = new String(request.getParameter("key").getBytes("iso-8859-1"), "utf-8");
+                if (select.equals("user")) {
+                    String r = "";
+                    r += this.webBean.showusercomment(key) + "<p>";
+
+                    r += this.webBean.showuserproduct(key) + "<p>";
+                    r += this.webBean.showuserticket(key) + "<p>";
+                    session.setAttribute("adminindexinf", r);
+                }
+                session.setAttribute("userkey", key);
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("seeuser")) {//看用户 
+                session.setAttribute("adminindexinf", this.webBean.showuser());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("tousercomment")) {//看某位用户
+                String key = request.getParameter("num");
+                String r = "";
+                r += this.webBean.showusercomment(key) + "<p>";
+                r += this.webBean.showuserproduct(key) + "<p>";
+                r += this.webBean.showuserticket(key) + "<p>";
+                session.setAttribute("adminindexinf", r);
+                session.setAttribute("userkey2", key);
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("deleteusercomment")) {//删除用户评论
+                String key = request.getParameter("num");
+                out.println(key + this.webBean.deletecomment(key));
+                key=(String)session.getAttribute("userkey2");
+                 String r = "";
+                r += this.webBean.showusercomment(key) + "<p>";
+                r += this.webBean.showuserproduct(key) + "<p>";
+                r += this.webBean.showuserticket(key) + "<p>";
+                session.setAttribute("adminindexinf", r);
+                
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }

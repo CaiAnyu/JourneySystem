@@ -34,6 +34,15 @@
         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
             <input type="submit" name="a" value="返回首页">
         </FORM>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=adminsearch>    
+        <select name="select">
+                <option value="product">旅游产品</option>
+                <option value="ticket" selected="selected">票务</option>
+                <option value="user">用户</option>
+            </select>
+            <input type="text" name="key">
+            <input type="submit" name="a" value="确认">
+             </FORM>
         <%=session.getAttribute("adminindexinf")%>
     </body>
 </html>

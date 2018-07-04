@@ -104,32 +104,35 @@ public class webBean implements webBeanLocal {
     @Override
     public String test() {
         try {
+
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+
             Statement st = con.createStatement();
-            String key="dfj321";
-            ResultSet rs = st.executeQuery("select 种类 from 票 where 票代号='" + key + "'");
-            rs.next();
-            if (rs.getString(1).equals("飞机票")) {
-                String sql = "UPDATE 票 SET 种类='已下架飞机票' WHERE 产品代号='" + key + "'";
-                st.executeUpdate(sql);
-                con.close();
-                return "S";
+
+            String key = "wwwww";
+            ResultSet rs = st.executeQuery("select * from 评论 WHERE 评论者名='" + key + "'");
+            ResultSet rs2 = st.executeQuery("select 评论代号 from 评论 WHERE 评论者名='" + key + "'");
+
+            String inf = "123467";
+
+            while (rs.next()) {
+                rs2.next();
+                inf += rs.getString(1);
+                inf += rs.getString(2);
+                inf += rs.getString(3);
+                inf += rs.getString(4);
+                inf += rs.getString(5);
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=deletecomment>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除\"></FORM>";
             }
-            if (rs.getString(1).equals("火车票")) {
-                String sql = "UPDATE 票 SET 种类='已下架火车票' WHERE 产品代号='" + key + "'";
-                st.executeUpdate(sql);
-                con.close();
-                return "S";
-            }
-            return "?";
+            return inf;
         } catch (ClassNotFoundException ex) {
-           return ex.toString();
+            return ex.toString();
         } catch (SQLException ex) {
             return ex.toString();
         }
- 
-    
+
     }
 
     @Override
@@ -508,10 +511,10 @@ public class webBean implements webBeanLocal {
                 if (rs2.getString(2).equals("火车票") || rs2.getString(2).equals("已下架火车票")) {
                     traininf += rs2.getString(1);
                     traininf += rs2.getString(3);
-                    traininf += rs2.getString(4);                
+                    traininf += rs2.getString(4);
                     traininf += rs2.getString(5);
-                     traininf += rs2.getString(6);
-                      traininf += rs2.getString(7);
+                    traininf += rs2.getString(6);
+                    traininf += rs2.getString(7);
                     traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketpay> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"付款\"></FORM><p>";
                     traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"退订\"></FORM>";
                     traininf += "<p>";
@@ -537,7 +540,7 @@ public class webBean implements webBeanLocal {
 
     @Override
     public boolean ticketpay(String key) {
-         try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
@@ -560,7 +563,7 @@ public class webBean implements webBeanLocal {
 
     @Override
     public boolean ticketdel(String key) {
-           try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
@@ -579,7 +582,7 @@ public class webBean implements webBeanLocal {
 
     @Override
     public String showjourneyorder() {
-          try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
@@ -595,14 +598,14 @@ public class webBean implements webBeanLocal {
                     hotelinf += rs2.getString(4);
                     hotelinf += rs2.getString(6);
                     hotelinf += rs2.getString(5);
-                    
+
                     hotelinf += "<p>";
                 } else {
                     journeyinf += rs2.getString(2);
                     journeyinf += rs2.getString(4);
                     journeyinf += rs2.getString(6);
                     journeyinf += rs2.getString(5);
-                    
+
                     journeyinf += "<p>";
                 }
             }
@@ -616,7 +619,7 @@ public class webBean implements webBeanLocal {
 
     @Override
     public String showticketorder() {
-         try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
@@ -630,11 +633,11 @@ public class webBean implements webBeanLocal {
                 if (rs2.getString(2).equals("火车票") || rs2.getString(2).equals("已下架火车票")) {
                     traininf += rs2.getString(1);
                     traininf += rs2.getString(3);
-                    traininf += rs2.getString(4);                
+                    traininf += rs2.getString(4);
                     traininf += rs2.getString(5);
-                     traininf += rs2.getString(6);
-                      traininf += rs2.getString(7);
-                    
+                    traininf += rs2.getString(6);
+                    traininf += rs2.getString(7);
+
                     traininf += "<p>";
                 } else {
                     planeinf += rs2.getString(1);
@@ -643,7 +646,7 @@ public class webBean implements webBeanLocal {
                     planeinf += rs2.getString(5);
                     planeinf += rs2.getString(6);
                     planeinf += rs2.getString(7);
-                    
+
                     planeinf += "<p>";
                 }
             }
@@ -657,7 +660,7 @@ public class webBean implements webBeanLocal {
 
     @Override
     public String showfavourite() {
-           try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
@@ -716,14 +719,14 @@ public class webBean implements webBeanLocal {
 
     @Override
     public String showallproductlist() {
-         try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 旅游产品");
             String inf = "";
             while (rs.next()) {
-                 inf += rs.getString(1);
+                inf += rs.getString(1);
                 inf += rs.getString(2);
                 inf += rs.getString(3);
                 inf += rs.getString(4);
@@ -749,25 +752,25 @@ public class webBean implements webBeanLocal {
 
     @Override
     public boolean productoff(String key) {
-            try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select 种类 from 旅游产品 where 产品代号='" + key + "'");
             rs.next();
             if (rs.getString(1).equals("酒店")) {
-                  String sql = "UPDATE 旅游产品 SET 种类='已下架酒店' WHERE 产品代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 旅游产品 SET 种类='已下架酒店' WHERE 产品代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
             if (rs.getString(1).equals("旅游团")) {
-                  String sql = "UPDATE 旅游产品 SET 种类='已下架旅游团' WHERE 产品代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 旅游产品 SET 种类='已下架旅游团' WHERE 产品代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
-           return false;
+            return false;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -785,18 +788,18 @@ public class webBean implements webBeanLocal {
             ResultSet rs = st.executeQuery("select 种类 from 旅游产品 where 产品代号='" + key + "'");
             rs.next();
             if (rs.getString(1).equals("已下架酒店")) {
-                  String sql = "UPDATE 旅游产品 SET 种类='酒店' WHERE 产品代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 旅游产品 SET 种类='酒店' WHERE 产品代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
             if (rs.getString(1).equals("已下架旅游团")) {
-                  String sql = "UPDATE 旅游产品 SET 种类='旅游团' WHERE 产品代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 旅游产品 SET 种类='旅游团' WHERE 产品代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
-           return false;
+            return false;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -866,33 +869,176 @@ public class webBean implements webBeanLocal {
         }
         return false;
     }
+
     @Override
     public boolean ticketon(String key) {
-            try {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select 种类 from 票 where 票代号='" + key + "'");
             rs.next();
             if (rs.getString(1).equals("已下架飞机票")) {
-                  String sql = "UPDATE 票 SET 种类='飞机票' WHERE 票代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 票 SET 种类='飞机票' WHERE 票代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
             if (rs.getString(1).equals("已下架火车票")) {
-                  String sql = "UPDATE 票 SET 种类='火车票' WHERE 票代号='" + key + "'";
-            st.executeUpdate(sql);
-            con.close();
-            return true;
+                String sql = "UPDATE 票 SET 种类='火车票' WHERE 票代号='" + key + "'";
+                st.executeUpdate(sql);
+                con.close();
+                return true;
             }
-           return false;
+            return false;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public String showallcomment() {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 评论");
+            ResultSet rs2 = st.executeQuery("select 评论代号 from 评论");
+            String inf = "";
+            while (rs.next()) {
+                rs2.next();
+                inf += rs2.getString(1) + "       ";
+                inf += rs.getString(1);
+                inf += rs.getString(2);
+                inf += rs.getString(3);
+                inf += rs.getString(4);
+                inf += rs.getString(5);
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=deletecomment>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除\"></FORM>";
+            }
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "出错啦！！！";
+    }
+
+    @Override
+    public boolean deletecomment(String key) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+
+            String sql = "DELETE FROM 评论 WHERE 评论代号='" + key + "'";
+            st.executeUpdate(sql);
+            con.close();
+            return true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public String showusercomment(String key) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 评论 WHERE 评论者名='" + key + "'");
+            ResultSet rs2 = st.executeQuery("select 评论代号 from 评论 WHERE 评论者名='" + key + "'");
+            String inf = "";
+
+            while (rs.next()) {
+                rs2.next();
+                inf += rs.getString(1);
+                inf += rs.getString(2);
+                inf += rs.getString(3);
+                inf += rs.getString(4);
+                inf += rs.getString(5);
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=deleteusercomment>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除\"></FORM>";
+            }
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "出错啦！！";
+    }
+
+    @Override
+    public String showuserproduct(String key) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 产品预定 where 操作者名='" + key + "'");
+            String inf = "";
+            while (rs.next()) {
+                inf += rs.getString(1);
+                inf += rs.getString(2);
+                inf += rs.getString(3);
+            }
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            return ex.toString();
+        } catch (SQLException ex) {
+            return ex.toString();
+        }
+    }
+
+    @Override
+    public String showuserticket(String key) {
+         try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 票预定 where 购买者名='" + key + "'");
+            String inf = "";
+            while (rs.next()) {
+                inf += rs.getString(1);
+                inf += rs.getString(2);
+                inf += rs.getString(3);
+                inf += rs.getString(4);
+            }
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            return ex.toString();
+        } catch (SQLException ex) {
+            return ex.toString();
+        }
+    }
+
+    @Override
+    public String showuser() {
+          try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 用户 where 身份='用户'");
+            String inf = "";
+            while (rs.next()) {
+                inf += rs.getString(1);
+                inf += rs.getString(3);
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=tousercomment>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"看详细信息\"></FORM>";
+            }
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            return ex.toString();
+        } catch (SQLException ex) {
+            return ex.toString();
+        }
     }
 
 }
