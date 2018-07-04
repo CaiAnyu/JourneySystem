@@ -68,5 +68,17 @@ public interface webBeanLocal {
     String showfavourite();
 
     boolean favdel(String key);
+
+    String showallproductlist();
+
+    boolean productoff(String key);
+
+    boolean producton(String key);
+
+    String showallticketlist();
+
+    boolean ticketon(String key);
+
+    boolean ticketoff(String key);
     
 }

@@ -49,6 +49,8 @@ public class CtrlServlet extends HttpServlet {
                 if (type.equals("1")) {                                          //管理员
                     if (this.webBean.adminlogin(request.getParameter("username"), request.getParameter("password")) == true) {
                         session.setAttribute("loginfalse", "true");
+                        session.setAttribute("adminindexinf", "");
+                        session.setAttribute("username", this.webBean.getusername());
                         RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                         disp.forward(request, response);
                     } else {
@@ -76,9 +78,9 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("touserindex")) {//去个人主页
-                    session.setAttribute("username", this.webBean.getusername());
-                        session.setAttribute("showhotel", this.webBean.showhotel(1));
-                        session.setAttribute("showjourney", this.webBean.showjourney(1));
+                session.setAttribute("username", this.webBean.getusername());
+                session.setAttribute("showhotel", this.webBean.showhotel(1));
+                session.setAttribute("showjourney", this.webBean.showjourney(1));
                 RequestDispatcher disp = request.getRequestDispatcher("userindex.jsp");
                 disp.forward(request, response);
             }
@@ -98,22 +100,22 @@ public class CtrlServlet extends HttpServlet {
             }
             if (new String(request.getParameter("method")).equals("journeypay")) {//旅游产品付款
                 out.println(this.webBean.journeypay(request.getParameter("num")));
-                     session.setAttribute("showjourneycart", this.webBean.showjourneycart());
-                     session.setAttribute("showjourneyorder", this.webBean.showjourneyorder());
+                session.setAttribute("showjourneycart", this.webBean.showjourneycart());
+                session.setAttribute("showjourneyorder", this.webBean.showjourneyorder());
                 RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("journeydel")) {//旅游产品退订
                 out.println(this.webBean.journeydel(request.getParameter("num")));
-                 session.setAttribute("showjourneycart", this.webBean.showjourneycart());
-                 
+                session.setAttribute("showjourneycart", this.webBean.showjourneycart());
+
                 RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("ticketpay")) {//票付款
                 out.println(this.webBean.ticketpay(request.getParameter("num")));
                 session.setAttribute("showticketcart", this.webBean.showticketcart());
-                    session.setAttribute("showticketorder", this.webBean.showticketorder());
+                session.setAttribute("showticketorder", this.webBean.showticketorder());
                 RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                 disp.forward(request, response);
             }
@@ -125,7 +127,7 @@ public class CtrlServlet extends HttpServlet {
             }
             if (new String(request.getParameter("method")).equals("journeyfavdel")) {//取消收藏
                 out.println(this.webBean.favdel(request.getParameter("num")));
-                 session.setAttribute("showfavourite", this.webBean.showfavourite());
+                session.setAttribute("showfavourite", this.webBean.showfavourite());
                 RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                 disp.forward(request, response);
             }
@@ -158,7 +160,7 @@ public class CtrlServlet extends HttpServlet {
                 // out.println(this.webBean.test());
                 out.println(this.webBean.userbuyticket(request.getParameter("num")));
                 RequestDispatcher disp = request.getRequestDispatcher("productlist.jsp");
-                   disp.forward(request, response);
+                disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("listproductdetail") || new String(request.getParameter("method")).equals("favtodetail")) {
                 // out.println(this.webBean.test());                   //看详细信息
@@ -230,6 +232,53 @@ public class CtrlServlet extends HttpServlet {
                     RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                     disp.forward(request, response);
                 }
+            }
+//***************************************************************************************************************************************************************
+//****************************************************************************************************************************************************************
+
+            if (new String(request.getParameter("method")).equals("manageproduct")) {//产品管理
+                session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("changeproduct")) {//产品修改
+                //       session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("productoff")) {//产品下架
+                String key = request.getParameter("num");
+                out.println(this.webBean.productoff(key));
+                session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("producton")) {//产品上架
+                String key = request.getParameter("num");
+                out.println(this.webBean.producton(key));
+                session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("manageticket")) {//票务管理
+                session.setAttribute("adminindexinf", this.webBean.showallticketlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+              if (new String(request.getParameter("method")).equals("ticketoff")) {//票务下架
+                String key = request.getParameter("num");
+               out.println(this.webBean.ticketoff(key));
+               // out.println(this.webBean.test());
+                session.setAttribute("adminindexinf", this.webBean.showallticketlist());
+               RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("ticketon")) {//票务上架
+                String key = request.getParameter("num");
+                out.println(this.webBean.ticketon(key));
+                session.setAttribute("adminindexinf", this.webBean.showallticketlist());
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
             }
             out.println("<!DOCTYPE html>");
             out.println("<html>");
