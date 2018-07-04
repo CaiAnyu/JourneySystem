@@ -1,6 +1,6 @@
 <%-- 
-    Document   : changeproduct
-    Created on : 2018-7-4, 19:23:14
+    Document   : changeticket
+    Created on : 2018-7-5, 1:50:41
     Author     : 78288
 --%>
 
@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%=session.getAttribute("changeproductinf")%>
-          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+        <h1>改票</h1>
+        <%=session.getAttribute("changeticketinf")%>
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
             <input type="submit" name="a" value="返回首页">
         </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>    

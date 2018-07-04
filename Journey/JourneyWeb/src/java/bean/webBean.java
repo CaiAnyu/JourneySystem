@@ -733,7 +733,7 @@ public class webBean implements webBeanLocal {
                 inf += rs.getString(5);
                 inf += rs.getString(6);
                 inf += rs.getString(7);
-                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeproduct>";
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeproduct>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=productoff>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM>";
@@ -824,7 +824,7 @@ public class webBean implements webBeanLocal {
                 inf += rs.getString(5);
                 inf += rs.getString(6);
                 inf += rs.getString(7);
-                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeticket>";
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeticket>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketoff>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM>";
@@ -1057,7 +1057,7 @@ public class webBean implements webBeanLocal {
                 inf += rs.getString(5);
                 inf += rs.getString(6);
                 inf += rs.getString(7);
-                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeproduct>";
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeproduct>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=productoff2>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM>";
@@ -1073,7 +1073,6 @@ public class webBean implements webBeanLocal {
         }
         return "出错啦！！！";
     }
-
     @Override
     public String searchforticketlist(String key) {
         try {
@@ -1090,7 +1089,7 @@ public class webBean implements webBeanLocal {
                 inf += rs.getString(5);
                 inf += rs.getString(6);
                 inf += rs.getString(7);
-                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeticket>";
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeticket>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketoff2>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM>";
@@ -1106,7 +1105,6 @@ public class webBean implements webBeanLocal {
         }
         return "出错啦！！！";
     }
-
     @Override
     public boolean newproduct(String name, String key, String type, int year, int month, int datee, int price, String detail, String url) {
         try {
@@ -1125,7 +1123,7 @@ public class webBean implements webBeanLocal {
             ps1.setString(1, key);
             ps1.setString(3, type);
             Calendar cal = Calendar.getInstance();
-            java.sql.Date date = new java.sql.Date(year-1900, month, datee);
+            java.sql.Date date = new java.sql.Date(year - 1900, month, datee);
             ps1.setDate(4, date);
             ps1.setInt(5, price);
             ps1.setString(6, detail);
@@ -1138,9 +1136,7 @@ public class webBean implements webBeanLocal {
         } catch (SQLException ex) {
             return false;
         }
-
     }
-
     @Override
     public boolean newticket(String key, String start, String terminal, int year, int month, int datee, int price, String type, String num) {
         try {
@@ -1148,7 +1144,6 @@ public class webBean implements webBeanLocal {
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 票 where 票代号='" + key + "' OR 车次='" + num + "'");
-
             if (rs.next()) {
                 con.close();
                 return false;
@@ -1159,7 +1154,7 @@ public class webBean implements webBeanLocal {
             ps1.setString(1, key);
             ps1.setString(3, start);
             Calendar cal = Calendar.getInstance();
-            java.sql.Date date = new java.sql.Date(year-1900, month, datee);
+            java.sql.Date date = new java.sql.Date(year - 1900, month, datee);
             ps1.setDate(5, date);
             ps1.setInt(6, price);
             ps1.setString(4, terminal);
@@ -1173,5 +1168,109 @@ public class webBean implements webBeanLocal {
             return false;
         }
     }
+    @Override
+    public String changeproductpage(String key) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 旅游产品 where 产品代号='" + key + "'");
+            String inf = "";
+            rs.next();
+            inf += rs.getString(1) + "<p>";
+            inf += rs.getString(3) + "<p>";
+            inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeproduct>";
+            inf += "<input type=\"hidden\" name=\"key\" value=\"" + rs.getString(1) + "\">";
+            inf += "<input type=\"hidden\" name=\"type\" value=\"" + rs.getString(3) + "\">";
+            inf += "<input type=\"text\" name=\"name\" value=\"" + rs.getString(2) + "\"><p>";
+            inf += "<input type=\"text\" name=\"year\" value=\"" + rs.getDate(4).getYear() + "\"><input type=\"text\" name=\"month\" value=\"" + rs.getDate(4).getMonth() + "\"><input type=\"text\" name=\"date\" value=\"" + rs.getDate(4).getDate() + "\"><p>";
+            inf += "<input type=\"text\" name=\"price\" value=\"" + rs.getInt(5) + "\">";
+            inf += "<input type=\"text\" name=\"detail\" value=\"" + rs.getString(6) + "\">";
+            inf += "<input type=\"text\" name=\"url\" value=\"" + rs.getString(7) + "\">";
+            inf += " <input type=\"submit\" name=\"s1\" value=\"确认\"></FORM>";
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "出错啦！！";
+    }
 
+    public boolean changeproduct(String name, String key, String type, int year, int month, int datee, int price, String detail, String url) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            PreparedStatement ps1 = null;
+            ps1 = con.prepareStatement("UPDATE 旅游产品 SET 产品名称=?,时间=?,价格=?,详细信息=?,图片URL=? WHERE 产品代号='" + key + "'");
+            ps1.setString(1, name);
+            Calendar cal = Calendar.getInstance();
+            java.sql.Date date = new java.sql.Date(year, month, datee);
+            ps1.setDate(2, date);
+            ps1.setInt(3, price);
+            ps1.setString(4, detail);
+            ps1.setString(5, url);
+            ps1.execute();
+            con.close();
+            return true;
+        } catch (ClassNotFoundException ex) {
+            return false;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+    public String changeticketpage(String key) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 票 where 票代号='" + key + "'");
+            String inf = "";
+
+            rs.next();
+            inf += rs.getString(1) + "<p>";
+            inf += rs.getString(2) + "<p>";
+            inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=changeticket>";
+            inf += "<input type=\"hidden\" name=\"key\" value=\"" + rs.getString(1) + "\">";
+            inf += "<input type=\"hidden\" name=\"type\" value=\"" + rs.getString(2) + "\">";
+            inf += "<input type=\"text\" name=\"start\" value=\"" + rs.getString(3) + "\"><p>";
+            inf += "<input type=\"text\" name=\"terminal\" value=\"" + rs.getString(4) + "\"><p>";
+            inf += "<input type=\"text\" name=\"year\" value=\"" + rs.getDate(5).getYear() + "\"><input type=\"text\" name=\"month\" value=\"" + rs.getDate(5).getMonth() + "\"><input type=\"text\" name=\"date\" value=\"" + rs.getDate(5).getDate() + "\"><p>";
+            inf += "<input type=\"text\" name=\"price\" value=\"" + rs.getInt(6) + "\">";
+            inf += "<input type=\"text\" name=\"num\" value=\"" + rs.getString(7) + "\">";
+            inf += " <input type=\"submit\" name=\"s1\" value=\"确认\"></FORM>";
+            return inf;
+        } catch (ClassNotFoundException ex) {
+            return ex.toString();
+        } catch (SQLException ex) {
+            return ex.toString();
+        }
+
+    }
+
+    public boolean changeticket(String key, String start, String terminal, int year, int month, int datee, int price, String type, String num) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
+            Statement st = con.createStatement();
+            PreparedStatement ps1 = null;
+            ps1 = con.prepareStatement("UPDATE 票 SET 车次=?,始发地=?,目的地=?,出发时间=?,价格=? WHERE 票代号='" + key + "'");
+            ps1.setString(1, num);
+            Calendar cal = Calendar.getInstance();
+            java.sql.Date date = new java.sql.Date(year, month, datee);
+            ps1.setDate(4, date);
+            ps1.setInt(5, price);
+            ps1.setString(2, start);
+            ps1.setString(3, terminal);
+            ps1.execute();
+            con.close();
+            return true;
+        } catch (ClassNotFoundException ex) {
+            return false;
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }
 }

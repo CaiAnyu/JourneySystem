@@ -100,5 +100,10 @@ public interface webBeanLocal {
     boolean newproduct(String name, String key, String type, int year, int month, int date, int price, String detail, String url);
 
     boolean newticket(String key, String start, String terminal, int year, int month, int datee, int price, String type, String num);
+
+    String changeproductpage(String key);
+    boolean changeproduct(String name, String key, String type, int year, int month, int datee, int price, String detail, String url);
+    String changeticketpage(String key);
+     boolean changeticket(String key, String start, String terminal, int year, int month, int datee, int price, String type, String num) ;
     
 }

@@ -241,11 +241,7 @@ public class CtrlServlet extends HttpServlet {
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }
-            if (new String(request.getParameter("method")).equals("changeproduct")) {//产品修改
-                //       session.setAttribute("adminindexinf", this.webBean.showallproductlist());
-                RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
-                disp.forward(request, response);
-            }
+
             if (new String(request.getParameter("method")).equals("productoff")) {//产品下架
                 String key = request.getParameter("num");
                 out.println(this.webBean.productoff(key));
@@ -324,14 +320,14 @@ public class CtrlServlet extends HttpServlet {
                 r += this.webBean.showuserproduct(key) + "<p>";
                 r += this.webBean.showuserticket(key) + "<p>";
                 session.setAttribute("adminindexinf", r);
-                session.setAttribute("userkey2", key);
+                session.setAttribute("userkey", key);
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("deleteusercomment")) {//删除用户评论
                 String key = request.getParameter("num");
                 out.println(key + this.webBean.deletecomment(key));
-                key = (String) session.getAttribute("userkey2");
+                key = (String) session.getAttribute("userkey");
                 String r = "";
                 r += this.webBean.showusercomment(key) + "<p>";
                 r += this.webBean.showuserproduct(key) + "<p>";
@@ -392,8 +388,8 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("newticket")) {//建票
-             // out.println(this.webBean.newticket(request.getParameter("key"),  new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")),  new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
-                 if (this.webBean.newticket(request.getParameter("key"),  new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")),  new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
+                // out.println(this.webBean.newticket(request.getParameter("key"),  new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")),  new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
+                if (this.webBean.newticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
                     RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                     disp.forward(request, response);
                 } else {
@@ -401,29 +397,67 @@ public class CtrlServlet extends HttpServlet {
                     disp.forward(request, response);
                 }
             }
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CtrlServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CtrlServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            if (new String(request.getParameter("method")).equals("tochangeproduct")) {//转到改产品页
+                String key = request.getParameter("num");
+                session.setAttribute("changeproductinf", this.webBean.changeproductpage(key));
+                RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                disp.forward(request, response);
+            }
+            if (new String(request.getParameter("method")).equals("changeproduct")) {//改产品
+                //  String key = request.getParameter("num");
+                if (this.webBean.changeproduct(new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8"), request.getParameter("key"), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("detail").getBytes("iso-8859-1"), "utf-8"), request.getParameter("url"))) {
+                    RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                    disp.forward(request, response);
+                } else {
+                    RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                    disp.forward(request, response);
+                }
+            }
+           
+        if (new String(request.getParameter("method")).equals("tochangeticket")) {//转到改票页
+             String key = request.getParameter("num");
+                session.setAttribute("changeticketinf", this.webBean.changeticketpage(key));
+            RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
+            disp.forward(request, response);
         }
+        if (new String(request.getParameter("method")).equals("changeticket")) {//改票
+                //  String key = request.getParameter("num");
+         //   out.println(this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
+     if (this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
+                    RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                    disp.forward(request, response);
+                } else {
+                    RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
+                    disp.forward(request, response);
+                }
+            }
+        if (new String(request.getParameter("method")).equals("toadminindex")) {//去管理主页
+                RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
+                disp.forward(request, response);
+            }
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet CtrlServlet</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>Servlet CtrlServlet at " + request.getContextPath() + "</h1>");
+        out.println("</body>");
+        out.println("</html>");
     }
+}
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -437,7 +471,7 @@ public class CtrlServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -448,7 +482,7 @@ public class CtrlServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

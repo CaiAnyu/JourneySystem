@@ -4,14 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/servlet/CtrlServlet.java</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/login.jsp</file>
             <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/adminindex.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/usercenter.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/userlist.jsp</file>
             <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/changeproduct.jsp</file>
             <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/bean/webBeanLocal.java</file>
+            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/newticket.jsp</file>
             <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/bean/webBean.java</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/userindex.jsp</file>
+            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/changeticket.jsp</file>
+            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/newproduct.jsp</file>
         </group>
     </open-files>
 </project-private>

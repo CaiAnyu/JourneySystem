@@ -22,7 +22,12 @@
                 详细介绍<input type="text" name="detail" value="没有"><p>
                 URL<input type="text" name="url" value="???"><p>
                 <input type="submit" name="s1" value="确认">
-
+        </FORM>
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="返回首页">
+        </FORM>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>    
+            <input type="submit" name="a" value="返回管理中心">
         </FORM>
     </body>
 </html>
