@@ -8,10 +8,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <title>JSP Page</title>
+         <style>
+      .left {
+        float: left;
+        width: 300px;
+        height: 300px;
+        background-color: white;
+      }
+      .right {
+        background-color: orange;
+        margin-left: 810px;
+        height: 500px;
+        border: 1px solid #000000
+      }
+    </style>
     </head>
     <body>
+        <h1 style="color:black">自助旅游网站</h1>
+            <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+            <div class="right">
+            <div style="margin:0 auto;width:100px">
+                <br />
+                <br />
+                <br />
         <h1>登录</h1>
         <FORM METHOD="post" ACTION=CtrlServlet?method=login>    
             用户名<input type="text" name="username" value="wwwww"><p>
@@ -25,6 +47,7 @@
             <input type="submit" name="s2" value="注册">
         </FORM>
         <%if (session.getAttribute("loginfalse")!=null) if (session.getAttribute("loginfalse").equals("false")) {out.println("<p>登录失败<p>");session.setAttribute("loginfalse", "true");}%>
-        
+            </div>
+            </div>  
     </body>
 </html>
