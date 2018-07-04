@@ -19,10 +19,10 @@
         <FORM METHOD="post" ACTION=CtrlServlet?method=manageticket>    
             <input type="submit" name="a" value="票务管理">
         </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=newjourney>    
+        <FORM METHOD="post" ACTION=CtrlServlet?method=tonewproduct>    
             <input type="submit" name="a" value="新建产品">
         </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=newticket>    
+        <FORM METHOD="post" ACTION=CtrlServlet?method=tonewticket>    
             <input type="submit" name="a" value="新建票务">
         </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=seecomment>    

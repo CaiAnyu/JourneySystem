@@ -92,5 +92,13 @@ public interface webBeanLocal {
     String showuserticket(String key);
 
     String showuser();
+
+    String searchforproductlist(String key);
+
+    String searchforticketlist(String key);
+
+    boolean newproduct(String name, String key, String type, int year, int month, int date, int price, String detail, String url);
+
+    boolean newticket(String key, String start, String terminal, int year, int month, int datee, int price, String type, String num);
     
 }
