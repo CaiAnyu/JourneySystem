@@ -217,12 +217,12 @@ public class webBean implements webBeanLocal {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from 预定 where 操作者名='" + name + "' AND 产品代号='" + n + "'");
+            ResultSet rs = st.executeQuery("select * from 产品预定 where 操作者名='" + name + "' AND 产品代号='" + n + "'");
             if (rs.next()) {
                 con.close();
                 return false;
             }
-            String sql = "INSERT INTO 预定 VALUES ('" + name + "', '" + n + "')";
+            String sql = "INSERT INTO 预定 VALUES ('" + name + "', '" + n + "','0')";
             st.executeUpdate(sql);
             con.close();
             return true;
@@ -262,15 +262,16 @@ public class webBean implements webBeanLocal {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from 购买 where 购买者名='" + name + "' AND 购买票代号='" + n + "'");
+            ResultSet rs = st.executeQuery("select * from 票预订 where 购买者名='" + name + "' AND 购买票代号='" + n + "'");
             if (rs.next()) {
                 con.close();
                 return false;
             }
             PreparedStatement ps1 = null;
-            ps1 = con.prepareStatement("INSERT INTO 购买 values (?,?,?)");
+            ps1 = con.prepareStatement("INSERT INTO 购买 values (?,?,?,?)");
             ps1.setString(2, name);
             ps1.setString(3, n);
+            ps1.setString(4,"0");
             Calendar cal = Calendar.getInstance();
             java.sql.Date date = new java.sql.Date(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             ps1.setDate(1, date);
