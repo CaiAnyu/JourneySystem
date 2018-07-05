@@ -12,17 +12,29 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>你好，<%=session.getAttribute("username")%></h1>
+        <div style="width: 100%;height:30px">
+            <div style="width: 90%;float:left">
+        <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
+            你好，<%=session.getAttribute("username")%>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="s2" value="个人中心">
+        </FORM>   
+             </div>
+            <div style="float:right">
+                 <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="退出登录">
+                 </FORM>
+            </div>
+        </div>
+        <hr>
+     
         <%=session.getAttribute("showhotel")%>
         <%=session.getAttribute("showjourney")%>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
-            <input type="submit" name="s2" value="个人中心">
-        </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=usersearch>    
             <select name="select">
                 <option value="酒店">酒店</option>
                 <option value="旅游团" selected="selected">旅游团</option>
             </select>
+            &nbsp;&nbsp;
             <input type="text" name="key">
             <input type="submit" name="s3" value="搜索"><p>
         </FORM>
@@ -31,12 +43,11 @@
                 <option value="飞机票">飞机票</option>
                 <option value="火车票" selected="selected">火车票</option>
             </select>
-            始发地<input type="text" name="start"><p>
-            目的地<input type="text" name="terminal"><p>
+            &nbsp;&nbsp;
+            始发地:&nbsp;<input type="text" name="start">&nbsp;
+            目的地:&nbsp;<input type="text" name="terminal">&nbsp;
             <input type="submit" name="s4" value="搜索">
         </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="返回首页">
-        </FORM>
+   
     </body>
 </html>

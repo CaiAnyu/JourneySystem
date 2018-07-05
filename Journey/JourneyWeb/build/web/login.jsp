@@ -36,8 +36,8 @@
                 <br />
         <h1>登录</h1>
         <FORM METHOD="post" ACTION=CtrlServlet?method=login>    
-            用户名<input type="text" name="username" value="user3"><p>
-            密码  <input type="password" name="password" value="33333333"><p>
+            用户名<input type="text" name="username" value="user1"><p>
+            密码  <input type="password" name="password" value="22222222"><p>
             <INPUT type="radio" name="r" value="1" checked="checked">管理员<p>
             <INPUT type="radio" name="r" value="2" >用户<p>
             <input type="submit" name="s1" value="登录">

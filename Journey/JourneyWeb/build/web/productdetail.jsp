@@ -12,24 +12,45 @@
         <title>产品详情</title>
     </head>
     <body>
-        <h1>产品详情</h1>
+         <div style="width: 100%;height:30px">
+            <div style="width: 90%;float:left">
+        <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
+            你好，<%=session.getAttribute("username")%>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="s2" value="个人中心">
+        </FORM>   
+             </div>
+            <div style="float:right">
+            <FORM METHOD="post" ACTION=CtrlServlet?method=touserindex>    
+            <input type="submit" name="a" value="返回主页">
+              </FORM>
+            </div>
+        </div>
+        <hr>
+        <div style="width: 100%;height:30px">
+            
+            <div style="float:left">
+            <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddcart>    
+                <b>产品详情</b>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="s" value="加入购物车">&nbsp;&nbsp;
+             </FORM>
+            </div>
+            <div style="float:left">
+                <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddfavourite>    
+                <input type="submit" name="s" value="收藏">
+                </FORM>
+            </div>
+        </div>
+        <hr>
         <%=session.getAttribute("productdetail")%><p>
-        <%=session.getAttribute("productcomment")%><p>     
+        评价表<hr>
+        <%=session.getAttribute("productcomment")%><p>
+             <hr>
         <FORM METHOD="post" ACTION=CtrlServlet?method=comment>    
-            请在此输入评论<input type="text" name="comment" value="差评"><p>
+            请在此输入评论 <p><input type="text" name="comment" value="差评">&nbsp;&nbsp;
                 <input type="submit" name="s" value="提交评论">
         </FORM>
-         <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddcart>    
-                <input type="submit" name="s" value="加入购物车">
-        </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddfavourite>    
-                <input type="submit" name="s" value="收藏">
-        </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=touserindex>    
-            <input type="submit" name="a" value="返回个人主页">
-        </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="返回首页">
-        </FORM>
+        <hr>
+        
+     
+    
     </body>
 </html>

@@ -62,8 +62,8 @@ public class CtrlServlet extends HttpServlet {
                     if (this.webBean.userlogin(request.getParameter("username"), request.getParameter("password")) == true) {
                         session.setAttribute("loginfalse", "true");
                         session.setAttribute("username", this.webBean.getusername());
-                        session.setAttribute("showhotel", this.webBean.showhotel(1));
-                        session.setAttribute("showjourney", this.webBean.showjourney(1));
+                        session.setAttribute("showhotel", this.webBean.showhotel(3));
+                        session.setAttribute("showjourney", this.webBean.showjourney(3));
                         RequestDispatcher disp = request.getRequestDispatcher("userindex.jsp");
                         disp.forward(request, response);
                     } else {
@@ -79,8 +79,8 @@ public class CtrlServlet extends HttpServlet {
             }
             if (new String(request.getParameter("method")).equals("touserindex")) {//去个人主页
                 session.setAttribute("username", this.webBean.getusername());
-                session.setAttribute("showhotel", this.webBean.showhotel(1));
-                session.setAttribute("showjourney", this.webBean.showjourney(1));
+                session.setAttribute("showhotel", this.webBean.showhotel(3));
+                session.setAttribute("showjourney", this.webBean.showjourney(3));
                 RequestDispatcher disp = request.getRequestDispatcher("userindex.jsp");
                 disp.forward(request, response);
             }
