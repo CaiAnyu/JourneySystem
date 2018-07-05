@@ -3,7 +3,7 @@
     Created on : 2018-7-1, 20:45:57
     Author     : 78288
 --%>
-
+  
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
         <h1 style="color:black">自助旅游网站</h1>
             <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
             <div class="right">
-            <div style="margin:0 auto;width:100px">
+            <div style="margin:0 auto;width:150px">
                 <br />
                 <br />
                 <br />
@@ -38,8 +38,8 @@
         <FORM METHOD="post" ACTION=CtrlServlet?method=login>    
             用户名<input type="text" name="username" value="user1"><p>
             密码  <input type="password" name="password" value="22222222"><p>
-            <INPUT type="radio" name="r" value="1" checked="checked">管理员<p>
-            <INPUT type="radio" name="r" value="2" >用户<p>
+            <INPUT type="radio" name="r" value="1" >管理员
+            <INPUT type="radio" name="r" value="2" checked="checked">用户<p>
             <input type="submit" name="s1" value="登录">
 
         </FORM>

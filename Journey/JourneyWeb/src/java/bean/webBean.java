@@ -146,11 +146,18 @@ public class webBean implements webBeanLocal {
             if (n <= 0) {
                 return null;
             }
+               inf+="<div style=\" width:1500px;height:350px\">";
             while (rs.next() && n > 0) {
+                inf+="<div class=\"pic\" style=\" float:left;\">";
+                inf+="<div style=\" float:left\">";
+                inf+="<img height=\"250px\" width=\"300px\" src=\"pic\\"+rs.getString(7)+"\">";
+                inf +="</div>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=listproductdetail>";
-                inf += "酒店             " + rs.getString(2) + "                 <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"" + rs.getString(7) + "\"></FORM><p>";
+                inf +=  "名称: "+rs.getString(2) + "  <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\"  name=\"s1\" value=\"" + "查看详情" + "\"></FORM><p>";
+                inf +="</div>";
                 n--;
             }
+            inf+="</div>";
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,11 +183,18 @@ public class webBean implements webBeanLocal {
             if (n <= 0) {
                 return null;
             }
+            inf+="<div style=\" width:1500px;height:350px\">";
             while (rs.next() && n > 0) {
+                inf+="<div class=\"pic\" style=\" float:left;\">";
+                  inf+="<div style=\" float:left\">";
+                inf+="<img height=\"250px\" width=\"300px\" src=\"pic\\"+rs.getString(7)+"\">";
+                inf +="</div>";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=listproductdetail>";
-                inf += "旅游团             " + rs.getString(2) + "                 <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"" + rs.getString(7) + "\"></FORM><p>";
+                inf +="名称: "+rs.getString(2) + "  <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"" + "查看详情" + "\"></FORM><p>";
                 n--;
+                 inf +="</div>";
             }
+             inf+="</div><br>";
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
