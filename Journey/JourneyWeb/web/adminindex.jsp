@@ -103,7 +103,8 @@
          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
             <input type="submit" name="a" value="返回首页">
          </FORM>
-         </div> 
+         </div>    
+         
          </div>
         
             <div style="float:left;margin-left:500px">
