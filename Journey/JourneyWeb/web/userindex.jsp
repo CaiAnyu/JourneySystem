@@ -20,11 +20,16 @@
             div.pic{
                 margin-top:10px;
                 margin-bottom: 10px;
-                margin-left:25px;
+                margin-left:20px;
                 margin-right:20px;
                 border:2px solid;
                 border-radius:8px;
                 
+            }
+            div.main{
+                margin-left:8%;
+                margin-right:8%;
+                background-color: #f2f2f2;
             }
             div.top{
                     border-radius: 5px;
@@ -117,11 +122,19 @@
         </FORM>
         </div>      
         </div>
-        <p class="biaoqian" align="center">热  门  酒  店</p>
+        <div style="width:100%;height: 80%">
+            <div class="main">
+                
+                     <p class="biaoqian" align="center">热  门  酒  店</p>
         <%=session.getAttribute("showhotel")%>
         <hr>
         <p class="biaoqian" align="center">热  门  旅  游  团</p>
         <%=session.getAttribute("showjourney")%>
+            </div>
+          
+            
+        </div>
+     
        
        
    

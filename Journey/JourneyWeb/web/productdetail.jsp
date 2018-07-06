@@ -10,9 +10,12 @@
     <head>
         <title>产品详情</title>
         <style>
-<<<<<<< HEAD
-            
-=======
+             p.biaoqian{
+             
+                font-size: 25px;
+                
+                background-color: #4BAF62;
+            }
                div.container {
                     width:1600px;
                     height: 50px;
@@ -20,7 +23,11 @@
                     background-color: #f2f2f2;
                   
               }
->>>>>>> 96a32656adab9f8f49901b31dc9d6c4350d45f51
+                div.main{
+                margin-left:12%;
+                margin-right:12%;
+                background-color:#f2f2f2;
+            }
           div.top{
                     border-radius: 5px;
                     background-color: #f2f2f2;
@@ -66,9 +73,6 @@
             </div>
         </div>
         <hr>
-<<<<<<< HEAD
-        
-=======
         <div class="container">
         <div style="float:left">
               <FORM METHOD="post" ACTION=CtrlServlet?method=usersearch>    
@@ -95,22 +99,11 @@
         </div>      
         </div>  
         <br>
+       
+      
         <hr>
->>>>>>> 96a32656adab9f8f49901b31dc9d6c4350d45f51
-        <div style="width: 100%;height:30px">
-            
-            <div style="float:left">
-            <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddcart>    
-                <b>产品详情</b>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="s" value="加入购物车">&nbsp;&nbsp;
-             </FORM>
-            </div>
-            <div style="float:left">
-                <FORM METHOD="post" ACTION=CtrlServlet?method=journeyaddfavourite>    
-                <input type="submit" name="s" value="收 藏">
-                </FORM>
-            </div>
-        </div>
-        <hr>
+          <div style="width:100%;height: 80%">
+              <div class="main">
         <%=session.getAttribute("productdetail")%><p>
         评价表<hr>
         <%=session.getAttribute("productcomment")%><p>
@@ -120,7 +113,8 @@
                 <input type="submit" name="s" value="提交评论">
         </FORM>
         <hr>
-        
+         </div>
+        </div>
      
     
     </body>
