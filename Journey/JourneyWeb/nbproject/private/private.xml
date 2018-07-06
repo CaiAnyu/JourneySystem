@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/servlet/CtrlServlet.java</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/adminindex.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/changeproduct.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/bean/webBeanLocal.java</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/newticket.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/src/java/bean/webBean.java</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/changeticket.jsp</file>
-            <file>file:/C:/Users/78288/Documents/NetBeansProjects/JourneyWeb/web/newproduct.jsp</file>
+            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/src/java/bean/webBean.java</file>
+            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/src/java/servlet/CtrlServlet.java</file>
+            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/productdetail.jsp</file>
+            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/userindex.jsp</file>
+            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/userlist.jsp</file>
         </group>
     </open-files>
 </project-private>

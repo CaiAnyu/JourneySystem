@@ -320,13 +320,24 @@ public class webBean implements webBeanLocal {
             String inf = "";
 
             while (rs.next()) {
-                inf += rs.getString(1)+" ";
-                inf += rs.getString(2)+" ";
-                inf += rs.getString(3)+" ";
-                inf += rs.getString(4).substring(0, 10)+" ";
-                inf += rs.getString(5)+" ";
+                inf+="<div style=\"width:1500px;height:350px;\">";
+                inf+="<div style=\"float:left; width:440px;height:330px\">";
+                inf+="<img height=\"320px\" width=\"400px\" src=\"pic\\"+rs.getString(7)+"\">";
+                inf+="</div>";  
+                inf+="<div style=\"float:left; width:950px;height:330px\">";
+                inf +="<div style=\"width:350px;height:100px\">";
+                //inf += rs.getString(1)+" ";
+                inf += "名称： "+rs.getString(2)+"<br>";
+                //inf += rs.getString(3)+" ";
+                inf += "可预定时间: "+rs.getString(4).substring(0, 10)+"<br>";
+                inf += "限时优惠价： "+rs.getString(5)+" 元<hr>";
+                inf += "</div>";
+                inf +="<div style=\"width:550px;height:200px\">";
                 inf += rs.getString(6)+" ";
-                inf += rs.getString(7)+"<p>";
+                inf += "</div>";
+                inf +="</div>";
+                inf +="</div>";
+               // inf += rs.getString(7)+"<p>";
 
             }
 
