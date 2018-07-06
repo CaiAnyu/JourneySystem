@@ -16,6 +16,19 @@
                 
                 background-color: #4BAF62;
             }
+            #text{
+                width: 90%;
+        height: 35px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+     margin-top: 5px;
+     margin-left: 10px;
+      margin-right: 10px;
+    margin-bottom: 5px;
+    resize: vertical;
+            }
                div.container {
                     width:1600px;
                     height: 50px;
@@ -33,6 +46,7 @@
                     background-color: #f2f2f2;
                      padding: 10px;
             }
+         
           input[type=submit] {
                   background-color: #4CAF50;
                   color: white;
@@ -102,18 +116,19 @@
        
       
         <hr>
-          <div style="width:100%;height: 80%">
-              <div class="main">
+          <div style="width:100%;height: 90%">
+              <div class="main" style="height:90%">
         <%=session.getAttribute("productdetail")%><p>
-        评价表<hr>
+        <p class="biaoqian" align="center"> 相  关  热  评 </p><hr>
         <%=session.getAttribute("productcomment")%><p>
-             <hr>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=comment>    
-            请在此输入评论 <p><input type="text" name="comment" value="差评">&nbsp;&nbsp;
-                <input type="submit" name="s" value="提交评论">
-        </FORM>
-        <hr>
          </div>
+              <div class="main" style="height:10%">
+                  <FORM METHOD="post" ACTION=CtrlServlet?method=comment>    
+            
+           <input type="text" id="text" name="comment" placeholder="请在此输入评论...." value="">&nbsp;&nbsp;
+                <input type="submit" name="s" value="提交评论">
+                </FORM>
+             </div>
         </div>
      
     

@@ -377,15 +377,37 @@ public class webBean implements webBeanLocal {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 评论 where 评论产品代号='" + key + "'");
             String inf = "";
-
+            
+              inf+="<div style=\"width:100%;height:35px\">";
+                  inf+="<div style=\"float:left; width:10%;height:30px\"></div>";
+                inf+="<div style=\"float:left; width:20%;height:30px\">";
+                inf += " 评 论 时 间 ";
+                inf+="</div>";
+                inf+="<div style=\"float:left; width:55%;height:30px\">";
+                inf += "内 容 ";
+                inf+="</div>";
+                 inf+="<div style=\"float:left; width:10%;height:30px\">";
+                inf += " 用 户 名 ";
+                inf+="</div>";
+                 inf+="</div>";
+            inf+="<div style=\"width:100%;overflow:scroll;height:300px;\">";
+           
             while (rs.next()) {
+                 inf+="<div style=\"width:100%;height:55px\">";
+                  inf+="<div style=\"float:left; width:10%;height:50px\"></div>";
+                inf+="<div style=\"float:left; width:20%;height:50px\">";
                 inf += rs.getString(1).substring(0, 10)+" ";
+                inf+="</div>";
+                inf+="<div style=\"float:left; width:55%;overflow-y:scroll;height:50px\">";
                 inf += rs.getString(2)+" ";
+                inf+="</div>";
+                 inf+="<div style=\"float:left; width:10%;height:50px\">";
                 inf += rs.getString(3)+" ";
-                inf += rs.getString(4)+" ";
-                inf += rs.getString(5)+"<p>";
-
+                inf+="</div>";
+                 inf+="</div>";
+                 
             }
+            inf+="</div>";
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
