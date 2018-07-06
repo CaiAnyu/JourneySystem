@@ -16,6 +16,16 @@
                 
                 background-color: #4BAF62;
             }
+             select{
+            margin-top: 7px;
+
+            width:80px;
+            height:37px;
+        }
+        form{
+        padding: 2px;
+        margin: 2px;
+            }
             #text{
                 width: 90%;
         height: 35px;
@@ -55,7 +65,11 @@
                      border-radius: 4px;
                  cursor: pointer;
                  }
-         
+                input.searchinput{
+                     width: 45px;
+                    height: 33px;
+                 
+                 }
             input[type=submit]:hover {
             background-color: #45a049;
             }

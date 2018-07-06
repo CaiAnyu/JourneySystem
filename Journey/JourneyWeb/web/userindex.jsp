@@ -11,24 +11,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
+      
             p.biaoqian{
              
                 font-size: 25px;
                 
                 background-color: #4BAF62;
             }
+                 select{
+            margin-top: 7px;
+            width: 80px;
+            height:37px;
+        }
             div.pic{
                 margin-top:10px;
                 margin-bottom: 10px;
                 margin-left:20px;
                 margin-right:20px;
-                border:2px solid;
+                border:1px solid;
                 border-radius:8px;
                 
             }
             div.main{
-                margin-left:8%;
-                margin-right:8%;
+                margin-left:12%;
+                margin-right:12%;
                 background-color: #f2f2f2;
             }
             div.top{
@@ -37,14 +43,14 @@
                      padding: 10px;
             }
             div.container {
-                    width: 100%;
-                    float:left;
+                  width:1600px;
+                    height: 50px;
                     border-radius: 3px;
                     background-color: #f2f2f2;
                   
               }
               input[type=submit] {
-                  background-color: #4CAF50;
+          background-color: #4CAF50;
                   color: white;
                    padding: 4px 4px;
                  border: none;
@@ -70,12 +76,7 @@
     margin-bottom: 3px;
     resize: vertical;
         }
-        select{
-            margin-top: 7px;
-
-            width: 80px;
-            height:37px;
-        }
+   
         form{
     padding: 2px;
     margin: 2px;
@@ -122,7 +123,11 @@
         </FORM>
         </div>      
         </div>
-        <div style="width:100%;height: 80%">
+            <br>
+       
+      
+        <hr>
+        <div  style="width:100%;height: 90%">
             <div class="main">
                 
                      <p class="biaoqian" align="center">热  门  酒  店</p>

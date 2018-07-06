@@ -30,15 +30,7 @@
                 
                 background-color: #4BAF62;
             }
-            div.pic{
-                margin-top:10px;
-                margin-bottom: 10px;
-                margin-left:25px;
-                margin-right:20px;
-                border:2px solid;
-                border-radius:8px;
-                
-            }
+        
             div.top{
                     border-radius: 5px;
                     background-color: #f2f2f2;
@@ -103,8 +95,7 @@
          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
             <input type="submit" name="a" value="返回首页">
          </FORM>
-         </div>    
-         
+         </div> 
          </div>
         
             <div style="float:left;margin-left:500px">
