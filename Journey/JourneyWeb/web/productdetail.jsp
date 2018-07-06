@@ -8,10 +8,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>产品详情</title>
         <style>
+<<<<<<< HEAD
             
+=======
+               div.container {
+                    width:1600px;
+                    height: 50px;
+                    border-radius: 3px;
+                    background-color: #f2f2f2;
+                  
+              }
+>>>>>>> 96a32656adab9f8f49901b31dc9d6c4350d45f51
           div.top{
                     border-radius: 5px;
                     background-color: #f2f2f2;
@@ -57,7 +66,37 @@
             </div>
         </div>
         <hr>
+<<<<<<< HEAD
         
+=======
+        <div class="container">
+        <div style="float:left">
+              <FORM METHOD="post" ACTION=CtrlServlet?method=usersearch>    
+            <select name="select">
+                <option value="酒店">酒店</option>
+                <option value="旅游团" selected="selected">旅游团</option>
+            </select>
+            &nbsp;&nbsp;
+            <input type="text" name="key">&nbsp;
+            <input class="searchinput" type="submit" name="s3" value="搜索"><p>
+            </FORM>
+        </div>
+        <div style="float:left;margin-left:20px">
+             <FORM METHOD="post" ACTION=CtrlServlet?method=usersearchticket>    
+            <select name="select">
+                <option value="飞机票">飞机票</option>
+                <option value="火车票" selected="selected">火车票</option>
+            </select>
+            &nbsp;&nbsp;
+            始发地:&nbsp;<input type="text" name="start">&nbsp;
+            目的地:&nbsp;<input type="text" name="terminal">&nbsp;
+            <input class="searchinput" type="submit" name="s4" value="搜索">
+        </FORM>
+        </div>      
+        </div>  
+        <br>
+        <hr>
+>>>>>>> 96a32656adab9f8f49901b31dc9d6c4350d45f51
         <div style="width: 100%;height:30px">
             
             <div style="float:left">
