@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <style>
                 #header {
-            background-color:orange;
+            background-color:#4BAF62;
             color:black;
             text-align:center;
             padding:10px 100px 10px 100px;
