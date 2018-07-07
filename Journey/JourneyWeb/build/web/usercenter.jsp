@@ -116,8 +116,13 @@
         <FORM METHOD="post" ACTION=CtrlServlet?method=repassword>    
             重置密码: &nbsp;&nbsp;&nbsp;&nbsp;新密码： <input type="password" name="password">&nbsp;
                 再确认： <input type="password" name="repassword">&nbsp;
-            <input type="submit" name="s1" value="更改密码"><p>
-                
+            <input type="submit" name="s1" value="更改密码">
+                  <%if (session.getAttribute("repasswordfalse") != null) {
+                if (session.getAttribute("repasswordfalse").equals("false")) {
+                    out.println("重置失败");
+                    session.setAttribute("registerfalse", "true");
+                }
+            }%>
         </FORM>
          <hr>
          <div style="width:100%;height: 90%">

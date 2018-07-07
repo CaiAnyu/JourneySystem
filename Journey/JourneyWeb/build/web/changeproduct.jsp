@@ -11,17 +11,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
-             .header {
-            background-color:#4BAF62;
-            color:black;
-            text-align:center;
-            padding:10px 100px 10px 100px;
-             }
-            p.biaoqian{
+                       
+              p.biaoqian{
              
                 font-size: 25px;
                 
                 background-color: #4BAF62;
+            }
+             div.pic{
+                 background-color:#f2f2f2;
+                border:1px solid;
+                border-radius:8px;
+                
             }
             div.top{
                     border-radius: 5px;
@@ -29,6 +30,11 @@
                      padding: 10px;
                    
                      
+            }
+              div.main{
+                margin-left:15%;
+                margin-right:15%;
+                    background-color:#f2f2f2;
             }
             div.container {
                     width: 100%;
@@ -38,6 +44,7 @@
                   
               }
               input[type=submit] {
+           
                   background-color: #4CAF50;
                   color: white;
                    padding: 4px 4px;
@@ -54,7 +61,7 @@
             background-color: #45a049;
             }
             input[type=text], select, textarea {
-        width: 200px;
+        width:180px;
         height: 35px;
         padding: 3px;
         border: 1px solid #ccc;
@@ -64,10 +71,41 @@
     margin-bottom: 3px;
     resize: vertical;
         }
+        #new{
+              width:100px;
+                     height: 50px;
+                  background-color: #4CAF50;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+        }
+         #return{
+              width:100px;
+                     height: 50px;
+                  background-color: #4CAF50;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+        }
+        #jieshao{
+             width:600px;
+        height:40px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        resize: vertical;
+        }
         select{
             margin-top: 7px;
 
-            width: 80px;
+            width: 100px;
             height:37px;
         }
         form{
@@ -77,17 +115,28 @@
         </style>
     </head>
     <body>
-        <div class="header"><h1>修改产品信息</h1></div>
-         <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
-         <div style="width: 300px; height: 500px;margin: 0 auto;">
-        <%=session.getAttribute("changeproductinf")%>
-          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="返回首页">
+                   <div class="top" style="width: 100%;height:30px">
+         <div style="width: 85%;float:left;height:30px">
+        <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>     
+            你好，<%=session.getAttribute("username")%>&nbsp;&nbsp; <input type="submit" name="a" value="管理中心">
         </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>    
-            <input type="submit" name="a" value="返回管理中心">
-        </FORM>
+         </div>
+        <div style="float:right;height:25px">
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="退出登录">
+         </FORM>
          </div> 
-              
+         </div>
+             
+           <hr>
+            <div  style="width:100%;height: 90%">
+            <div class="main">
+     
+
+       <p class="biaoqian" align="center">产 品 修 改</p><hr>
+        <%=session.getAttribute("changeproductinf")%>
+          
+       
+           </div>    
     </body>
 </html>

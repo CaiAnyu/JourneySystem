@@ -19,7 +19,7 @@
                  position:fixed;
                }
             .right {
-                 background-color: white;
+            
                  margin-left: 200px;
                  height: 600px;
                 
@@ -30,13 +30,24 @@
                 
                 background-color: #4BAF62;
             }
-        
+             div.pic{
+                 background-color:#f2f2f2;
+                border:1px solid;
+                border-radius:8px;
+                
+            }
             div.top{
+               
                     border-radius: 5px;
                     background-color: #f2f2f2;
                      padding: 10px;
                    
                      
+            }
+              div.main{
+                margin-left:4%;
+                margin-right:4%;
+                
             }
             div.container {
                     width: 100%;
@@ -62,7 +73,7 @@
             background-color: #45a049;
             }
             input[type=text], select, textarea {
-        width: 200px;
+        width:400px;
         height: 35px;
         padding: 3px;
         border: 1px solid #ccc;
@@ -75,7 +86,7 @@
         select{
             margin-top: 7px;
 
-            width: 80px;
+            width: 100px;
             height:37px;
         }
         form{
@@ -93,22 +104,22 @@
          </div>
         <div style="float:right;height:25px">
          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="返回首页">
+            <input type="submit" name="a" value="退出登录">
          </FORM>
          </div> 
          </div>
-        
+        <hr>
             <div style="float:left;margin-left:500px">
             
             <FORM METHOD="post" ACTION=CtrlServlet?method=adminsearch>  
             <select name="select">
-                <option value="product">旅游产品</option>
-                <option value="ticket" selected="selected">票务</option>
+                <option value="product"selected="selected">旅游产品</option>
+                <option value="ticket" >票务</option>
                 <option value="user">用户</option>
             </select>
             &nbsp;&nbsp;
-            <input type="text" name="key">
-            <input type="submit" name="a" value="确认">
+            <input type="text" placeholder="请在此输入查询信息..."  name="key">
+            <input type="submit" name="a" value="确认查询">
             </FORM>
             
                 

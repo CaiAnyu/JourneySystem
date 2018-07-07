@@ -11,13 +11,40 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
-                        #header {
-            background-color:#4BAF62;
-            color:black;
-            text-align:center;
-            padding:10px 100px 10px 100px;
-             }
-             input[type=submit] {
+                       
+              p.biaoqian{
+             
+                font-size: 25px;
+                
+                background-color: #4BAF62;
+            }
+             div.pic{
+                 background-color:#f2f2f2;
+                border:1px solid;
+                border-radius:8px;
+                
+            }
+            div.top{
+                    border-radius: 5px;
+                    background-color: #f2f2f2;
+                     padding: 10px;
+                   
+                     
+            }
+              div.main{
+                margin-left:15%;
+                margin-right:15%;
+                    background-color:#f2f2f2;
+            }
+            div.container {
+                    width: 100%;
+                    float:left;
+                    border-radius: 3px;
+                    background-color: #f2f2f2;
+                  
+              }
+              input[type=submit] {
+           
                   background-color: #4CAF50;
                   color: white;
                    padding: 4px 4px;
@@ -34,7 +61,7 @@
             background-color: #45a049;
             }
             input[type=text], select, textarea {
-        width: 200px;
+        width:180px;
         height: 35px;
         padding: 3px;
         border: 1px solid #ccc;
@@ -44,37 +71,86 @@
     margin-bottom: 3px;
     resize: vertical;
         }
+        #new{
+              width:100px;
+                     height: 50px;
+                  background-color: #4CAF50;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+        }
+         #return{
+              width:100px;
+                     height: 50px;
+                  background-color: #4CAF50;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+        }
+        #jieshao{
+             width:500px;
+        height:40px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        resize: vertical;
+        }
         select{
             margin-top: 7px;
 
-            width: 80px;
+            width: 100px;
             height:37px;
         }
         form{
     padding: 2px;
     margin: 2px;
+    }
         </style>
     </head>
     <body>
-                <div id="header"><h1>新建产品</h1></div>
-         <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
-          <div style="width: 300px; height: 500px;margin: 0 auto;">
-        <FORM METHOD="post" ACTION=CtrlServlet?method=newproduct>    
-                名称<input type="text" name="name" value="12345"><p>
-                代号<input type="text" name="key" value="25"><p>
-                种类<input type="text" name="type" value="酒店"><p>
-                时间<input type="text" name="year" value="2018"><input type="text" name="month" value="12"><input type="text" name="date" value="31"><p>
-                价格<input type="text" name="price" value="1"><p>
-                详细介绍<input type="text" name="detail" value="没有"><p>
-                URL<input type="text" name="url" value="???"><p>
-                <input type="submit" name="s1" value="确认">
+                   <div class="top" style="width: 100%;height:30px">
+         <div style="width: 85%;float:left;height:30px">
+        <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>     
+            你好，<%=session.getAttribute("username")%>&nbsp;&nbsp; <input type="submit" name="a" value="管理中心">
         </FORM>
+         </div>
+        <div style="float:right;height:25px">
          <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="返回首页">
+            <input type="submit" name="a" value="退出登录">
+         </FORM>
+         </div> 
+         </div>
+             
+           <hr>
+          <div  style="width:100%;height: 90%">
+            <div class="main">
+                
+          <p class="biaoqian" align="center">新 建 产 品</p><hr>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=newproduct>    
+                &nbsp;名称：<input type="text" name="name" value="N号酒店"><p>
+                &nbsp;代号：<input type="text" name="key" value="28"><p>
+               &nbsp;种类：<input type="text" name="type" value="酒店"><p>
+               &nbsp;时间：<input type="text" name="year" value="2018">&nbsp;年&nbsp;&nbsp;<input type="text" name="month" value="11">&nbsp;月&nbsp;&nbsp;<input type="text" name="date" value="21">&nbsp;日<p>
+                &nbsp;价格：<input type="text" name="price" value="100">&nbsp;元<p>
+                
+                &nbsp;图片URL：<input type="text" name="url" value="jiu2.jpg,jiu2X.jpg"><p>
+               &nbsp;详细介绍：<input id="jieshao" type="text" name="detail" value="无介绍">
+                &nbsp;&nbsp;
+          
+     
+                        <input id="new" type="submit" name="s1" value="确认新建">
+              
+               
         </FORM>
-        <FORM METHOD="post" ACTION=CtrlServlet?method=toadminindex>    
-            <input type="submit" name="a" value="返回管理中心">
-        </FORM>
-          </div>
+     
+                </div>
+              </div>
     </body>
 </html>
