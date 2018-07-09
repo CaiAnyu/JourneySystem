@@ -11,17 +11,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>管理员</title>
          <style>
+        
+
             .left {
-                 float: left;
-                 width: 100px;
-                 height: 100%;
+              
                  background-color: #4BAF62; 
                  position:fixed;
+                  width: 10%;
+                  float: left;
+                  
+                  min-height: 100%;
+                  margin-bottom: -99999px;
+                  padding: 0 0 99999px;
                }
             .right {
             
-                 margin-left: 200px;
-                 height: 600px;
+                  height:50px;
+                 
+                 margin-left:10%;
                 
                }
             p.biaoqian{
@@ -69,9 +76,17 @@
                     height: 33px;
                  
                  }
+       
             input[type=submit]:hover {
             background-color: #45a049;
             }
+             input[type=submit]:action {
+            background-color: #636363;
+            }
+            input[type=submit]:visited {
+            background-color: #45a049;
+            }    
+           
             input[type=text], select, textarea {
         width:400px;
         height: 35px;
@@ -96,73 +111,80 @@
         </style>
     </head>
     <body>
-         <div class="top" style="width: 100%;height:30px">
-         <div style="width: 85%;float:left;height:30px">
+  
+<div class="left"> 
+            
+           <div style="width: 85%;float:left;height:30px">
         <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
             你好，<%=session.getAttribute("username")%>&nbsp;&nbsp;
         </FORM>
          </div>
-        <div style="float:right;height:25px">
-         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="退出登录">
-         </FORM>
-         </div> 
-         </div>
-        <hr>
-            <div style="float:left;margin-left:500px">
-            
-            <FORM METHOD="post" ACTION=CtrlServlet?method=adminsearch>  
-            <select name="select">
-                <option value="product"selected="selected">旅游产品</option>
-                <option value="ticket" >票务</option>
-                <option value="user">用户</option>
-            </select>
-            &nbsp;&nbsp;
-            <input type="text" placeholder="请在此输入查询信息..."  name="key">
-            <input type="submit" name="a" value="确认查询">
-            </FORM>
-            
-                
-            </div>
-        
          <br />
          <br />
-         <br />
-          
-        <div class="left"> 
-        
         <FORM METHOD="post" ACTION=CtrlServlet?method=manageproduct>    
             <input type="submit" name="a" value="产品管理">
         </FORM>
          <br />
-         
+         <br />
         <FORM METHOD="post" ACTION=CtrlServlet?method=manageticket>    
             <input type="submit" name="a" value="票务管理">
         </FORM>
          <br />
-       
+       <br />
         <FORM METHOD="post" ACTION=CtrlServlet?method=tonewproduct>    
             <input type="submit" name="a" value="新建产品">
         </FORM>
          <br />
-         
+         <br />
         <FORM METHOD="post" ACTION=CtrlServlet?method=tonewticket>    
             <input type="submit" name="a" value="新建票务">
         </FORM>
          <br />
-        
+        <br />
         <FORM METHOD="post" ACTION=CtrlServlet?method=seecomment>    
             <input type="submit" name="a" value="查看评论">
         </FORM>
          <br />
-         
+         <br />
         <FORM METHOD="post" ACTION=CtrlServlet?method=seeuser>    
             <input type="submit" name="a" value="查看用户">
         </FORM>
         </div>
      
        <div class="right"> 
+          <div class="top" style="width: 100%;height:40px;float:left;">
+             
+      
+        <div style="float:left;margin-left:300px">
+             
+            <FORM METHOD="post" ACTION=CtrlServlet?method=adminsearch>  
+            <select name="select">
+                <option value="product"selected="selected">旅游产品</option>
+                <option value="ticket" >票务</option>
+                <option value="user">用户</option>
+            </select>
+              
+            &nbsp;&nbsp;
+            <input type="text" placeholder="请在此输入查询信息..."  name="key">
+            <input type="submit" name="a" value="确认查询">
+            </FORM>
+            
+            
+           </div>
+        
+        
+        <div style="float:right;height:25px">
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="退出登录">
+         </FORM>
+         </div> 
+         
+         </div>  
+           <br />
+           <br />
+           <br />
         <%=session.getAttribute("adminindexinf")%>
+        
        </div>
     </body>
 </html>

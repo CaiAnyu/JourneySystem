@@ -3,25 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/productlist.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/newticket.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/src/java/servlet/CtrlServlet.java</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/usercenter.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/changeticket.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/productdetail.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/changeproduct.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/userlist.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/website.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/src/java/bean/webBean.java</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/register.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/userfilter.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/src/java/bean/webBeanLocal.java</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/newproduct.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/adminindex.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/userindex.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/bookticket.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/settlement.jsp</file>
-            <file>file:/C:/Users/xiaochuan/Documents/GitHub/JourneySystem/Journey/JourneyWeb/web/login.jsp</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/web/website.jsp</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/web/newproduct.jsp</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/src/java/servlet/CtrlServlet.java</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/src/java/bean/webBean.java</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/src/java/bean/webBeanLocal.java</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/web/login.jsp</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/web/websitedetail.jsp</file>
+            <file>file:/D:/大学课件/大三下/软件工程课设/工程文件/JourneySystem/Journey/JourneyWeb/web/adminindex.jsp</file>
         </group>
     </open-files>
 </project-private>
