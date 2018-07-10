@@ -83,6 +83,14 @@
     margin: 2px;
     }
         </style>
+          <script type="text/javascript">
+            function  tip9() {
+                    {
+                    alert("预定成功");
+                    }
+            }
+        </script>
+        
     <body>
            <div class="top" style="width: 100%;height:25px">
             <div style="width: 85%;float:left;height:25px">

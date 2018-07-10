@@ -109,6 +109,13 @@
     margin: 2px;
     }
         </style>
+        <script type="text/javascript">
+            function  tip2() {
+                    {
+                    alert("删除成功");
+                    }
+            }
+       </script>
     </head>
     <body>
   

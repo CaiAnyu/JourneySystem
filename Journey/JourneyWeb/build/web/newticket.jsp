@@ -113,6 +113,15 @@
     margin: 2px;
     }
         </style>
+        
+        <script type="text/javascript">
+function  tip1() {
+        {
+        alert("新建成功");
+        }
+}
+        </script>
+        
     </head>
     <body>
                     <div class="top" style="width: 100%;height:30px">
@@ -142,7 +151,7 @@
                  &nbsp;价格：<input type="text" name="price" value="3000"><p>
                  &nbsp;种类：<input type="text" name="type" value="火车"><p>
                  &nbsp;车次：<input type="text" name="num" value="H99"> &nbsp;&nbsp; 
-                <input id="new"type="submit" name="s1" value="确认新建">
+                <input id="new"type="submit" name="s1" value="确认新建" onclick="tip1()">
         </FORM>
           </div>
            </div>

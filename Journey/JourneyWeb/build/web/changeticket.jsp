@@ -113,6 +113,14 @@
     margin: 2px;
     }
         </style>
+        
+     <script type="text/javascript">
+function  tip() {
+        {
+        alert("修改成功");
+        }
+}
+</script>
     </head>
     <body>
              <div class="top" style="width: 100%;height:30px">

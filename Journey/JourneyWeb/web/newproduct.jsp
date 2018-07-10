@@ -113,6 +113,14 @@
     margin: 2px;
     }
         </style>
+        
+        <script type="text/javascript">
+function  tip1() {
+        {
+        alert("新建成功");
+        }
+}
+        </script>
     </head>
     <body>
                    <div class="top" style="width: 100%;height:30px">
@@ -145,7 +153,7 @@
                 &nbsp;&nbsp;
           
      
-                        <input id="new" type="submit" name="s1" value="确认新建">
+                        <input id="new" type="submit" name="s1" value="确认新建" onclick="tip1()">
               
                
         </FORM>

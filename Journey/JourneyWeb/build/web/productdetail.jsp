@@ -85,6 +85,23 @@
     resize: vertical;
         }
          </style>
+         <script type="text/javascript">
+            function  tip3() {
+                    {
+                    alert("提交成功");
+                    }
+            }
+             function  tip4() {
+                    {
+                    alert("预定成功");
+                    }
+            }
+             function  tip5() {
+                    {
+                    alert("收藏成功");
+                    }
+            }
+       </script>
     </head>
     <body>
           <div class="top" style="width: 100%;height:25px">
@@ -140,7 +157,7 @@
                   <FORM METHOD="post" ACTION=CtrlServlet?method=comment>    
             
            <input type="text" id="text" name="comment" placeholder="请在此输入评论...." value="">&nbsp;&nbsp;
-                <input type="submit" name="s" value="提交评论">
+                <input type="submit" name="s" value="提交评论" onclick="tip3()">
                 </FORM>
              </div>
         </div>
