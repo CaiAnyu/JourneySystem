@@ -11,29 +11,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>管理员</title>
          <style>
-        
-
             .left {
-              
+                 float: left;
+                 width: 100px;
+                 height: 35%;
                  background-color: #4BAF62; 
                  position:fixed;
-                  width: 10%;
-                  float: left;
-                  
-                  min-height: 100%;
-                  margin-bottom: -99999px;
-                  padding: 0 0 99999px;
                }
             .right {
             
-                  height:50px;
-                 
-                 margin-left:10%;
+                 margin-left: 200px;
+                 height: 600px;
                 
                }
             p.biaoqian{
              
-                font-size: 25px;
+                   font-size: 35px;
+                color: white;
                 
                 background-color: #4BAF62;
             }
@@ -63,6 +57,22 @@
                     background-color: #f2f2f2;
                   
               }
+              #newpr{
+                   background-color:#FF7F00;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+              }
+                #newti{
+                   background-color:#FF7F00;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
+              }
               input[type=submit] {
                   background-color: #4CAF50;
                   color: white;
@@ -76,17 +86,9 @@
                     height: 33px;
                  
                  }
-       
             input[type=submit]:hover {
             background-color: #45a049;
             }
-             input[type=submit]:action {
-            background-color: #636363;
-            }
-            input[type=submit]:visited {
-            background-color: #45a049;
-            }    
-           
             input[type=text], select, textarea {
         width:400px;
         height: 35px;
@@ -109,8 +111,18 @@
     margin: 2px;
     }
         </style>
-        <script type="text/javascript">
-            function  tip2() {
+         <script type="text/javascript">
+            function  tip1() {
+                    {
+                    alert("下架成功");
+                    }
+            }
+             function  tip2() {
+                    {
+                    alert("上架成功");
+                    }
+            }
+             function  tip3() {
                     {
                     alert("删除成功");
                     }
@@ -118,80 +130,79 @@
        </script>
     </head>
     <body>
-  
-<div class="left"> 
-            
-           <div style="width: 85%;float:left;height:30px">
+         <div class="top" style="width: 100%;height:30px">
+         <div style="width: 85%;float:left;height:30px">
         <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
             你好，<%=session.getAttribute("username")%>&nbsp;&nbsp;
         </FORM>
          </div>
-         <br />
-         <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=manageproduct>    
-            <input type="submit" name="a" value="产品管理">
-        </FORM>
-         <br />
-         <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=manageticket>    
-            <input type="submit" name="a" value="票务管理">
-        </FORM>
-         <br />
-       <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=tonewproduct>    
-            <input type="submit" name="a" value="新建产品">
-        </FORM>
-         <br />
-         <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=tonewticket>    
-            <input type="submit" name="a" value="新建票务">
-        </FORM>
-         <br />
-        <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=seecomment>    
-            <input type="submit" name="a" value="查看评论">
-        </FORM>
-         <br />
-         <br />
-        <FORM METHOD="post" ACTION=CtrlServlet?method=seeuser>    
-            <input type="submit" name="a" value="查看用户">
-        </FORM>
-        </div>
-     
-       <div class="right"> 
-          <div class="top" style="width: 100%;height:40px;float:left;">
-             
-      
-        <div style="float:left;margin-left:300px">
-             
+        <div style="float:right;height:25px">
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
+            <input type="submit" name="a" value="退出登录">
+         </FORM>
+         </div> 
+         </div>
+        <hr>
+            <div style="float:left;margin-left:500px">
+            
             <FORM METHOD="post" ACTION=CtrlServlet?method=adminsearch>  
             <select name="select">
                 <option value="product"selected="selected">旅游产品</option>
                 <option value="ticket" >票务</option>
                 <option value="user">用户</option>
             </select>
-              
             &nbsp;&nbsp;
             <input type="text" placeholder="请在此输入查询信息..."  name="key">
             <input type="submit" name="a" value="确认查询">
             </FORM>
             
-            
-           </div>
+                
+            </div>
         
+         <br />
+         <br />
+         <br />
+          
+        <div class="left"> 
         
-        <div style="float:right;height:25px">
-         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    
-            <input type="submit" name="a" value="退出登录">
-         </FORM>
-         </div> 
+        <FORM METHOD="post" ACTION=CtrlServlet?method=manageproduct>    
+            <input type="submit" name="a" value="产品管理">
+        </FORM>
+         <br />
          
-         </div>  
-           <br />
-           <br />
-           <br />
-        <%=session.getAttribute("adminindexinf")%>
+        <FORM METHOD="post" ACTION=CtrlServlet?method=manageticket>    
+            <input type="submit" name="a" value="票务管理">
+        </FORM>
+         <br />
+       
+     
         
+        <FORM METHOD="post" ACTION=CtrlServlet?method=seecomment>    
+            <input type="submit" name="a" value="评论管理">
+        </FORM>
+         <br />
+         
+        <FORM METHOD="post" ACTION=CtrlServlet?method=seeuser>    
+            <input type="submit" name="a" value="用户管理">
+        </FORM>
+          <br />
+    
+          <div style="background-color:#FF7F00;">
+         <FORM METHOD="post" ACTION=CtrlServlet?method=tonewproduct>    
+            <input  id="newpr"type="submit" name="a" value="新建产品">
+        </FORM>
+         <br />
+         
+        <FORM METHOD="post" ACTION=CtrlServlet?method=tonewticket>    
+            <input id="newti"type="submit" name="a" value="新建票务">
+        </FORM>
+         <br />      
+          </div>
+        
+        </div>
+     
+       <div class="right"> 
+        <%=session.getAttribute("adminindexinf")%>
        </div>
     </body>
 </html>

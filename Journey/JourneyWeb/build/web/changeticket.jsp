@@ -14,7 +14,8 @@
                        
               p.biaoqian{
              
-                font-size: 25px;
+                   font-size: 35px;
+                color: white;
                 
                 background-color: #4BAF62;
             }
@@ -113,14 +114,6 @@
     margin: 2px;
     }
         </style>
-        
-     <script type="text/javascript">
-function  tip() {
-        {
-        alert("修改成功");
-        }
-}
-</script>
     </head>
     <body>
              <div class="top" style="width: 100%;height:30px">
@@ -145,6 +138,17 @@ function  tip() {
          <%=session.getAttribute("changeticketinf")%>
         
          </div>
+            <%if (session.getAttribute("changeticketerror") != null) {
+                if (session.getAttribute("changeticketerror").equals("true")) {
+                   out.println("<script>");
+            out.println("alert('" + "修改失败" + "');");
+      
+            out.println("</script>"); 
+                    session.setAttribute("changeticketerror", "aaa");
+                }
+                
+               
+            }%>
          </div>
     </body>
 </html>

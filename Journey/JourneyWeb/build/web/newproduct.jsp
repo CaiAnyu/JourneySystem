@@ -14,7 +14,8 @@
                        
               p.biaoqian{
              
-                font-size: 25px;
+                   font-size: 35px;
+                color: white;
                 
                 background-color: #4BAF62;
             }
@@ -113,14 +114,6 @@
     margin: 2px;
     }
         </style>
-        
-        <script type="text/javascript">
-function  tip1() {
-        {
-        alert("新建成功");
-        }
-}
-        </script>
     </head>
     <body>
                    <div class="top" style="width: 100%;height:30px">
@@ -141,6 +134,7 @@ function  tip1() {
             <div class="main">
                 
           <p class="biaoqian" align="center">新 建 产 品</p><hr>
+           
         <FORM METHOD="post" ACTION=CtrlServlet?method=newproduct>    
                 &nbsp;名称：<input type="text" name="name" value="N号酒店"><p>
                 &nbsp;代号：<input type="text" name="key" value="28"><p>
@@ -153,11 +147,21 @@ function  tip1() {
                 &nbsp;&nbsp;
           
      
-                        <input id="new" type="submit" name="s1" value="确认新建" onclick="tip1()">
+                        <input id="new" type="submit" name="s1" value="确认新建">
               
                
         </FORM>
-     
+      <%if (session.getAttribute("newproducterror") != null) {
+                if (session.getAttribute("newproducterror").equals("true")) {
+                   out.println("<script>");
+            out.println("alert('" + "新建失败" + "');");
+      
+            out.println("</script>"); 
+                    session.setAttribute("newproducterror", "aaa");
+                }
+                
+               
+            }%>
                 </div>
               </div>
     </body>

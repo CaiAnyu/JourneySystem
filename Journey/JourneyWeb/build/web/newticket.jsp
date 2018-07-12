@@ -14,7 +14,8 @@
                        
               p.biaoqian{
              
-                font-size: 25px;
+                   font-size: 35px;
+                color: white;
                 
                 background-color: #4BAF62;
             }
@@ -113,15 +114,6 @@
     margin: 2px;
     }
         </style>
-        
-        <script type="text/javascript">
-function  tip1() {
-        {
-        alert("新建成功");
-        }
-}
-        </script>
-        
     </head>
     <body>
                     <div class="top" style="width: 100%;height:30px">
@@ -149,10 +141,21 @@ function  tip1() {
                  &nbsp;目的地: <input type="text" name="terminal" value="美食园"><p>
                  &nbsp;时间：<input type="text" name="year" value="2018">&nbsp;年&nbsp;&nbsp;<input type="text" name="month" value="11">&nbsp;月&nbsp;&nbsp;<input type="text" name="date" value="21">&nbsp;日<p>
                  &nbsp;价格：<input type="text" name="price" value="3000"><p>
-                 &nbsp;种类：<input type="text" name="type" value="火车"><p>
+                 &nbsp;种类：<input type="text" name="type" value="火车票"><p>
                  &nbsp;车次：<input type="text" name="num" value="H99"> &nbsp;&nbsp; 
-                <input id="new"type="submit" name="s1" value="确认新建" onclick="tip1()">
+                <input id="new"type="submit" name="s1" value="确认新建">
         </FORM>
+             <%if (session.getAttribute("newticketerror") != null) {
+                if (session.getAttribute("newticketerror").equals("true")) {
+                   out.println("<script>");
+            out.println("alert('" + "新建失败" + "');");
+      
+            out.println("</script>"); 
+                    session.setAttribute("newticketerror", "aaa");
+                }
+                
+               
+            }%>
           </div>
            </div>
     </body>

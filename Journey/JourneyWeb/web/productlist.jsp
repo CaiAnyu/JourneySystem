@@ -10,19 +10,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+           <script type="text/javascript">
+            function  tip9() {
+                    {
+                    alert("已预定");
+                    }
+            }
+        </script>
     </head>
        <style>
       
             p.biaoqian{
              
-                font-size: 25px;
-                
+                font-size: 35px;
+                color: white;
                 background-color: #4BAF62;
             }
                  select{
-            margin-top: 7px;
-            width: 80px;
-            height:37px;
+             width: 100px;
+        height: 35px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+     margin-top: 3px;
+    margin-bottom: 3px;
+    resize: vertical;
         }
             div.pic{
                 margin-top:10px;
@@ -42,6 +55,14 @@
                     border-radius: 5px;
                     background-color: #f2f2f2;
                      padding: 10px;
+            }
+             #zhongxin{
+                 background-color:#FF7F00;
+                  color: white;
+                   padding: 4px 4px;
+                 border: none;
+                     border-radius: 4px;
+                 cursor: pointer;
             }
             div.container {
                   width:1600px;
@@ -66,7 +87,7 @@
             input[type=submit]:hover {
             background-color: #45a049;
             }
-            input[type=text], select, textarea {
+            input[type=text], textarea {
         width: 200px;
         height: 35px;
         padding: 3px;
@@ -83,20 +104,12 @@
     margin: 2px;
     }
         </style>
-          <script type="text/javascript">
-            function  tip9() {
-                    {
-                    alert("预定成功");
-                    }
-            }
-        </script>
-        
     <body>
            <div class="top" style="width: 100%;height:25px">
             <div style="width: 85%;float:left;height:25px">
         <FORM METHOD="post" ACTION=CtrlServlet?method=userindextocenter>    
             你好，<%=session.getAttribute("username")%>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" name="s2" value="个人中心">
+            <input id="zhongxin"type="submit" name="s2" value="个人中心">
         </FORM>   
              </div>
             <div style="float:right;height:25px">
@@ -118,7 +131,7 @@
             <input class="searchinput" type="submit" name="s3" value="搜索"><p>
             </FORM>
         </div>
-        <div style="float:left;margin-left:20px">
+        <div style="float:left;margin-left:300px">
              <FORM METHOD="post" ACTION=CtrlServlet?method=usersearchticket>    
             <select name="select">
                 <option value="飞机票">飞机票</option>

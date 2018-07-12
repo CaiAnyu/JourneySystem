@@ -134,7 +134,7 @@ public class webBean implements webBeanLocal {
         }
 
     }
-
+     
     @Override
    public String showhotel(int n) {
         try {
@@ -149,7 +149,7 @@ public class webBean implements webBeanLocal {
                inf+="<div style=\" width:100%;height:300px\">";
             while (rs.next() && n > 0) {
                 String[] splitstr=rs.getString(7).split(",");
-                inf+="<div class=\"pic\" style=\" float:left; width:21%;height:240px\">";
+                inf+="<div class=\"pic\" style=\" float:left; width:21%;height:255px\">";
                 inf+="<div style=\" float:left\">";
                 inf+="<img height=\"200px\" width=\"100%\" src=\"pic\\"+splitstr[0]+"\">";
                 inf +="</div>";
@@ -187,7 +187,7 @@ public class webBean implements webBeanLocal {
             inf+="<div style=\" width:100%;height:300px\">";
             while (rs.next() && n > 0) {
                  String[] splitstr=rs.getString(7).split(",");
-                inf+="<div class=\"pic\" style=\" float:left; width:21%;height:240px\">";
+                inf+="<div class=\"pic\" style=\" float:left; width:21%;height:255px\">";
                   inf+="<div style=\" float:left\">";
                 inf+="<img height=\"200px\" width=\"100%\" src=\"pic\\"+splitstr[0]+"\">";
                 inf +="</div>";
@@ -220,10 +220,12 @@ public class webBean implements webBeanLocal {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 旅游产品 where 种类='" + type + "' AND 产品名称 LIKE '%" + key + "%'");
             String inf = "";
+            int flag=0;
              inf+="<div style=\" width:100%;height:700px;overflow:scroll;\">";
             while (rs.next()) {
+                 flag++;
                 String[] splitstr=rs.getString(7).split(",");
-                inf += "<div class=\"pic\" style=\"float:left;height:240px;width:21%;\">";
+                inf += "<div class=\"pic\" style=\"float:left;height:255px;width:21%;\">";
                  inf+="<div style=\" float:left\">";
                 inf+="<img height=\"200px\" width=\"100%\" src=\"pic\\"+splitstr[0]+"\">";
                 inf +="</div>";
@@ -232,7 +234,12 @@ public class webBean implements webBeanLocal {
                 inf+="</div>";
 // inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"加入购物车\"></FORM><p>";
             }
+            if(flag==0)
+            {
+                inf+="<div style=\"width: 100%;text-align: center;height:10px\">无相关信息，请重新查询</div>";
+            }
             inf+="</div>";
+             
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,8 +278,9 @@ public class webBean implements webBeanLocal {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://D:\\JourneyWeb.accdb");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from 票 where 种类='" + type + "' AND 始发地='" + start + "' AND 目的地='" + terminal + "'");
+            ResultSet rs = st.executeQuery("select * from 票 where 种类='" + type + "' AND 始发地 LIKE'%" + start + "%' AND 目的地 LIKE'%" + terminal + "%'");
             String inf = "";
+            int flag=0;
              int a=0;
                  inf+="<div style=\"width:100%;height:35px\">";
                   inf+="<div style=\"float:left; width:6%;height:30px\"></div>";
@@ -296,6 +304,7 @@ public class webBean implements webBeanLocal {
                 inf+="</div>";
                   inf+="</div>";
             while (rs.next()) {
+                flag++;
                 // inf+="<FORM METHOD=\"post\" ACTION=CtrlServlet?method=listproductdetail>";  
                  a++;
                 if(a==1)
@@ -322,10 +331,14 @@ public class webBean implements webBeanLocal {
                        inf+="</div>";
                     inf +="<div style=\"float:left;width: 7%;height:50px\">";    
                // inf2 = type + "  " + rs.getString(2) +" "+ rs.getString(3) +" "+ rs.getString(4) +" "+ rs.getString(5)+" " + rs.getString(6)+" " + rs.getString(7)+" ";//+"                 <input type=\"submit\" name=\"s1\" value=\""+rs.getString(7)+"\"></FORM>";
-                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"立 即 预 定\"  onclick=\"tip9()\"></FORM><p>";
+                inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"立 即 预 定\"onclick=\"tip9()\"></FORM><p>";
                    inf+="</div>" ;
                    inf+="</div>" ;
 //inf2 ="";
+            }
+             if(flag==0)
+            {
+                inf+="<div style=\"width: 100%;background-color: #f2f2f2;text-align: center;height:30px\">无相关信息，请重新查询</div>";
             }
             if(a==0)
             return inf;
@@ -399,16 +412,18 @@ public class webBean implements webBeanLocal {
                 inf += "<hr></div>";
                 inf +=  "<div style=\"margin-top:10px;width:550px;height:50px; \">  <div style=\"float:left\">\n" +
 "            <FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart>    \n" +
-"              <input type=\"submit\" name=\"s\" value=\"产 品 预 定\" onclick=\"tip4()\">&nbsp;&nbsp;&nbsp;&nbsp;\n" +
+"              <input id=\"yuding\" type=\"submit\" name=\"s\" value=\"产 品 预 定\" onclick=\"tip4()\">&nbsp;&nbsp;&nbsp;&nbsp;\n" +
 "             </FORM>\n" +
 "            </div>\n" +
 "            <div style=\"float:left\">\n" +
 "                <FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddfavourite>    \n" +
 "                <input type=\"submit\" name=\"s\" value=\"立 即 收 藏\" onclick=\"tip5()\">\n" +
 "                </FORM>\n" +
-"            </div></div>";
+"            </div>"
+                        + "<div style=\"float:left;margin-top:5px;height:40px;\"><a href=\"#DD\" > &nbsp;&nbsp;&nbsp;查 看 评 论</a> </div></div>";
                 inf +="</div>";
                 inf +="</div>";
+            
                 inf +=" <p class=\"biaoqian\" align=\"center\">产 品 详 情</p>";
                 inf +="<div style=\"text-align: center;\">";
                 inf+="<img style=\"display: inline-block;\" src=\"pic\\"+splitstr[1]+"\">";
@@ -592,10 +607,10 @@ public class webBean implements webBeanLocal {
                      hotelinf+="</div>";
                  //hotelinf+="</div>";
                     hotelinf +="<div style=\"float:left;width: 8%;height:50px\">";
-                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeypay> "+hotelinf2+"<input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\" onclick=\"tip7()\" ></FORM> ";
+                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeypay> "+hotelinf2+"<input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\"onclick=\"tip7()\"></FORM> ";
                     hotelinf += "</div>";
                     hotelinf += " <div style=\"float:left;width: 8%;height:50px\">";
-                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeydel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\" onclick=\"tip8()\"></FORM>";
+                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeydel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\"onclick=\"tip8()\"></FORM>";
                     hotelinf+= "</div>";
                     hotelinf+= "</div>";
                
@@ -614,10 +629,10 @@ public class webBean implements webBeanLocal {
                      journeyinf+="</div>";
                  //hotelinf+="</div>";
                     journeyinf +="<div style=\"float:left;width: 8%;height:50px\">";
-                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeypay> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\" onclick=\"tip7()\"></FORM>";
+                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeypay> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\"onclick=\"tip7()\"></FORM>";
                   journeyinf +=  "</div>";
                    journeyinf += " <div style=\"float:left;width: 8%;height:50px\">";
-                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeydel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\" onclick=\"tip8()\"></FORM>";
+                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeydel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\"onclick=\"tip8()\"></FORM>";
                     journeyinf+= "</div>";
                     journeyinf+= "</div>";
             
@@ -738,10 +753,10 @@ public class webBean implements webBeanLocal {
                       traininf += rs2.getString(7)+" ";
                        traininf+="</div>";
                      traininf +="<div style=\"float:left;width: 7%;height:50px\">";
-                    traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketpay><input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\" onclick=\"tip7()\"></FORM>";
+                    traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketpay><input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\"onclick=\"tip7()\"></FORM>";
                     traininf += "</div>";
                      traininf +="<div style=\"float:left;width: 7%;height:50px\">";
-                    traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\" onclick=\"tip8()\"></FORM>";
+                    traininf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\"onclick=\"tip8()\"></FORM>";
                     traininf += "</div>";
                     traininf += "</div>";
         
@@ -767,10 +782,10 @@ public class webBean implements webBeanLocal {
                      planeinf += rs2.getString(7)+" ";
                       planeinf+="</div>";
                     planeinf+="<div style=\"float:left;width: 7%;height:50px\">";
-                    planeinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketpay> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\" onclick=\"tip7()\"></FORM>";
+                    planeinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketpay> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"立即付款\"onclick=\"tip7()\"></FORM>";
                      planeinf += "</div>";
                      planeinf+="<div style=\"float:left;width: 7%;height:50px\">";
-                    planeinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\" onclick=\"tip8()\"></FORM>";
+                    planeinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"一键退订\"onclick=\"tip8()\"></FORM>";
                     planeinf += "</div>";
                     planeinf += "</div>";
                 }
@@ -1041,7 +1056,7 @@ public class webBean implements webBeanLocal {
                     hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=favtodetail><input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"查看详情\"></FORM>";
                     hotelinf += "</div>";
                     hotelinf += " <div style=\"float:left;width: 8%;height:50px\">";
-                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyfavdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"取消收藏\" onclick=\"tip6()\"></FORM>";
+                    hotelinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyfavdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"取消收藏\"onclick=\"tip6()\"></FORM>";
                     hotelinf += "</div>";
                      hotelinf += "</div>";//1
                     
@@ -1063,7 +1078,7 @@ public class webBean implements webBeanLocal {
                     journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=favtodetail><input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"查看详情\"></FORM>";
                     journeyinf +=  "</div>";
                    journeyinf += " <div style=\"float:left;width: 8%;height:50px\">";
-                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyfavdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"取消收藏\" onclick=\"tip6()\"></FORM>";
+                    journeyinf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyfavdel> <input type=\"hidden\" name=\"num\" value=\"" + key + "\"> <input type=\"submit\" value=\"取消收藏\"onclick=\"tip6()\"></FORM>";
                     journeyinf += "</div>";
                     journeyinf += "</div>";
                 }
@@ -1105,7 +1120,7 @@ public class webBean implements webBeanLocal {
             String inf = "";
             inf+="<div>";
             inf+="<div class=\"main\">";
-           
+                   inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 产 品 列 表 </div>";
                 inf+="<div class=\"pic\" style=\"width: 90%;height:35px\">";
                 inf+="<div style=\"float:left; width:20%;height:35px\">";
                 //inf += rs.getString(6)+" ";
@@ -1164,9 +1179,9 @@ public class webBean implements webBeanLocal {
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeproduct>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修 改 信 息\"></FORM></div>";
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=productoff>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下 架 产 品\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下 架 产 品\"onclick=\"tip1()\"></FORM></div>";
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=producton>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上 架 产 品\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上 架 产 品\"onclick=\"tip2()\"></FORM></div>";
                 // inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"加入购物车\"></FORM><p>";
                 inf +="</div>";
                 inf +="</div>";
@@ -1251,7 +1266,7 @@ public class webBean implements webBeanLocal {
             String inf = "";
              inf+="<div>";
             inf+="<div class=\"main\">";
-           
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 票 务 列 表 </div>";
                 inf+="<div class=\"pic\" style=\"width: 90%;height:35px\">";
                 inf+="<div style=\"float:left; width:10%;height:35px\">";
                 //inf += rs.getString(6)+" ";
@@ -1311,9 +1326,9 @@ public class webBean implements webBeanLocal {
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeticket>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM></div>";
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketoff>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"onclick=\"tip1()\"></FORM></div>";
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketon>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上架\"onclick=\"tip2()\"></FORM></div>";
                 // inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"加入购物车\"></FORM><p>";
                 inf +="</div>";
                 inf +="</div>";
@@ -1398,7 +1413,7 @@ public class webBean implements webBeanLocal {
             String inf = "";
               inf+="<div>";
             inf+="<div class=\"main\">";
-             inf+="<div style=\"width:90%;height:30px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 评 价 情 况 </div>";
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 评 价 情 况 </div>";
              inf+="<div class=\"pic\"style=\"width:90%;height:35px \">";
         
              inf+="<div style=\"float:left; width:6%;height:35px\"></div>";
@@ -1446,7 +1461,7 @@ public class webBean implements webBeanLocal {
                 inf+="</div>";
                 inf+="<div style=\"float:left; width:10%;height:50px\">";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=deletecomment>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除评论\" onclick=\"tip2()\"></FORM>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除评论\"onclick=\"tip3()\"></FORM>";
                 inf += "</div>";
                 inf += "</div>";
                  inf+="<div  style=\"width:100%;height:10px\">";
@@ -1491,9 +1506,10 @@ public class webBean implements webBeanLocal {
             ResultSet rs = st.executeQuery("select * from 评论 WHERE 评论者名='" + key + "'");
             ResultSet rs2 = st.executeQuery("select 评论代号 from 评论 WHERE 评论者名='" + key + "'");
             String inf = "";
+            int flag=0;
   inf+="<div>";
             inf+="<div class=\"main\">";
-            inf+="<div style=\"width:90%;height:30px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 评 价 情 况 </div>";
+            inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 评 价 情 况 </div>";
              inf+="<div class=\"pic\"style=\"width:90%;height:35px \">";
         
              inf+="<div style=\"float:left; width:6%;height:35px\"></div>";
@@ -1518,6 +1534,7 @@ public class webBean implements webBeanLocal {
                  inf+="</div>";
                   inf+="<div  style=\"width:100%;height:10px\"></div>";
             while (rs.next()) {
+                flag++;
                 rs2.next();
                  inf+="<div class=\"pic\" style=\"width:90%;height:55px\">";
                   //inf+="<div style=\"float:left; width:10%;height:50px\"></div>";
@@ -1539,14 +1556,19 @@ public class webBean implements webBeanLocal {
                 inf+="</div>";
                 inf+="<div style=\"float:left; width:10%;height:50px\">";
                 inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=deleteusercomment>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除评价\" onclick=\"tip2()\"></FORM>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs2.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"删除评价\"onclick=\"tip3()\"></FORM>";
            inf += "</div>";
                 inf += "</div>";
                  inf+="<div  style=\"width:100%;height:10px\">";
                  inf += "</div>";
             }
+            
                 inf+="<div>";
                     inf+="<div>";
+                      if(flag==0)
+            {
+                inf+="<div style=\"width: 90%;text-align: center;height:10px\">无该用户相关信息</div>";
+            }
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -1565,9 +1587,10 @@ public class webBean implements webBeanLocal {
             ResultSet rs = st.executeQuery("select * from 产品预定 where 操作者名='" + key + "'");
             String inf = "";
              inf+="<div>";
-        
-             inf+="<div style=\"width:90%;height:30px;background-color:#4BAF62;margin:5px;text-align: center;\">预 约 产 品 情 况</div>";
+             int flag=0;
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin:5px;text-align: center;\">预 约 产 品 情 况</div>";
             while (rs.next()) {
+                flag++;
                  inf+="<div class=\"pic\" style=\"width:90%;height:40px;margin:5px;\">";
                 inf+="<div  style=\"float:left;height:35px;width:15%;\"></div>";
                  inf+="<div  style=\"float:left;height:35px;width:20%;\">";
@@ -1584,6 +1607,10 @@ public class webBean implements webBeanLocal {
             }
          
             inf+="</div>";
+              if(flag==0)
+            {
+                inf+="<div style=\"width: 90%;text-align: center;height:10px\">无该用户相关信息</div>";
+            }
             return inf;
         } catch (ClassNotFoundException ex) {
             return ex.toString();
@@ -1600,11 +1627,13 @@ public class webBean implements webBeanLocal {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 票预定 where 购买者名='" + key + "'");
             String inf = "";
+            int flag=0;
               inf+="<div>";
           
              
-             inf+="<div style=\"width:90%;height:30px;background-color:#4BAF62;margin:5px;text-align: center;\">预 约 票 务 情 况</div>";
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin:5px;text-align: center;\">预 约 票 务 情 况</div>";
             while (rs.next()) {
+                flag++;
                    inf+="<div class=\"pic\" style=\"width:90%;height:40px;margin:5px;\">";
                    inf+="<div  style=\"float:left;height:35px;width:8%;\"></div>";
                    inf+="<div  style=\"float:left;height:35px;width:20%;\">";
@@ -1624,6 +1653,10 @@ public class webBean implements webBeanLocal {
             }
            
             inf+="</div>";
+              if(flag==0)
+            {
+                inf+="<div style=\"width: 90%;text-align: center;height:10px\">无该用户相关信息</div>";
+            }
             return inf;
         } catch (ClassNotFoundException ex) {
             return ex.toString();
@@ -1642,7 +1675,7 @@ public class webBean implements webBeanLocal {
             String inf = "";
             inf+="<div>";
             inf+="<div class=\"main\">";
-            inf+="<div style=\"width:90%;height:30px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 用 户 列 表 </div>";
+            inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 用 户 列 表 </div>";
        
             while (rs.next()) {
                 inf+="<div class=\"pic\"style=\"float:left;height:40px;width:300px;margin:10px\">";
@@ -1676,9 +1709,10 @@ public class webBean implements webBeanLocal {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 旅游产品 WHERE 产品名称 LIKE '%" + key + "%'");
             String inf = "";
+            int flag=0;
                 inf+="<div>";
             inf+="<div class=\"main\">";
-           
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 产 品 列 表 </div>";
                 inf+="<div class=\"pic\" style=\"width: 90%;height:35px\">";
                 inf+="<div style=\"float:left; width:20%;height:35px\">";
                 //inf += rs.getString(6)+" ";
@@ -1706,6 +1740,7 @@ public class webBean implements webBeanLocal {
                  inf +="</div>";
                   inf +="</div>";
             while (rs.next()) {
+                 flag++;
                 String[] splitstr=rs.getString(7).split(",");
                 inf+="<div style=\"width: 90%;height:10px\">";
                 inf +="</div>";
@@ -1736,11 +1771,11 @@ public class webBean implements webBeanLocal {
                   inf += "<div style=\"float:left; width: 10%;margin-top:10px;height:130px\">";
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeproduct>";
                 
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修 改 信 息\"></FORM></div>";
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=productoff2>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下 架 产 品\"onclick=\"tip1()\"></FORM></div>";
                 inf += "<div style=\"margin-top:4px\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=producton2>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上 架 产 品\"onclick=\"tip2()\"></FORM></div>";
                 // inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"加入购物车\"></FORM><p>";
                 inf +="</div>";
                 inf +="</div>";
@@ -1748,6 +1783,10 @@ public class webBean implements webBeanLocal {
                 inf +="</div>";
             }
             inf+="</div></div>";
+             if(flag==0)
+            {
+                inf+="<div style=\"width: 90%;text-align: center;height:10px\">无相关信息，请重新查询</div>";
+            }
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -1764,9 +1803,10 @@ public class webBean implements webBeanLocal {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from 票 where 票代号 LIKE '%" + key + "%' OR 始发地 LIKE '%" + key + "%' OR 目的地 LIKE '%" + key + "%'");
             String inf = "";
+             int flag=0;
               inf+="<div>";
             inf+="<div class=\"main\">";
-           
+             inf+="<div style=\"width:90%;font-size: 30px;color:white;height:40px;background-color:#4BAF62;margin-bottom:5px;text-align: center;\"> 票 务 列 表 </div>";
                 inf+="<div class=\"pic\" style=\"width: 90%;height:35px\">";
                 inf+="<div style=\"float:left; width:10%;height:35px\">";
                 //inf += rs.getString(6)+" ";
@@ -1797,6 +1837,7 @@ public class webBean implements webBeanLocal {
                  inf +="</div>";
                   inf +="</div>";
             while (rs.next()) {
+               flag++;
               inf+="<div style=\"width: 90%;height:10px\">";
                 inf +="</div>";
                  inf+="<div class=\"pic\" style=\"width: 90%;height:50px\">";
@@ -1826,15 +1867,19 @@ public class webBean implements webBeanLocal {
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=tochangeticket>";
                 inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"修改\"></FORM></div>";
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketoff2>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"下架\"onclick=\"tip1()\"></FORM></div>";
                 inf += "<div style=\"float:left\"><FORM METHOD=\"post\" ACTION=CtrlServlet?method=ticketon2>";
-                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上架\"></FORM></div>";
+                inf += "<input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"><input type=\"submit\" name=\"s1\" value=\"上架\"onclick=\"tip2()\"></FORM></div>";
                 // inf += "<FORM METHOD=\"post\" ACTION=CtrlServlet?method=journeyaddcart> <input type=\"hidden\" name=\"num\" value=\"" + rs.getString(1) + "\"> <input type=\"submit\" value=\"加入购物车\"></FORM><p>";
                inf +="</div>";
                 inf +="</div>";
             }
             inf +="</div>";
             inf +="</div>";
+            if(flag==0)
+            {
+                inf+="<div style=\"width: 90%;text-align: center;height:10px\">无相关信息，请重新查询</div>";
+            }
             return inf;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(webBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -1928,7 +1973,7 @@ public class webBean implements webBeanLocal {
             inf += "&nbsp;价格：<input type=\"text\" name=\"price\" value=\"" + rs.getInt(5) + "\"><p>";
             inf += "&nbsp;图片URL: <input type=\"text\" name=\"url\" value=\"" + rs.getString(7) + "\"><p>";
             inf += "&nbsp;详细信息：<input id=\"jieshao\"type=\"text\" name=\"detail\" value=\"" + rs.getString(6) + "\">&nbsp;&nbsp;&nbsp;&nbsp;";
-            inf += "<input id=\"new\"type=\"submit\" name=\"s1\" value=\"确认修改\" onclick=\"tip()\"></FORM>";
+            inf += "<input id=\"new\"type=\"submit\" name=\"s1\" value=\"确认修改\"></FORM>";
             
             return inf;
         } catch (ClassNotFoundException ex) {
@@ -1982,7 +2027,7 @@ public class webBean implements webBeanLocal {
             inf += "&nbsp;日期: <input type=\"text\" name=\"year\" value=\"" + (rs.getDate(5).getYear()+1900)+ "\">&nbsp;&nbsp;年&nbsp;<input type=\"text\" name=\"month\" value=\"" + rs.getDate(5).getMonth() + "\">&nbsp;&nbsp;月&nbsp;<input type=\"text\" name=\"date\" value=\"" + rs.getDate(5).getDate() + "\">&nbsp;&nbsp;日<p>";
             inf += "&nbsp;价格: <input type=\"text\" name=\"price\" value=\"" + rs.getInt(6) + "\"><p>";
             inf += "&nbsp;车次：<input type=\"text\" name=\"num\" value=\"" + rs.getString(7) + "\">&nbsp;&nbsp;&nbsp;&nbsp;";
-            inf += " <input id=\"new\" type=\"submit\" name=\"s1\" value=\"确认修改\" onclick=\"tip()\"></FORM>";
+            inf += " <input id=\"new\" type=\"submit\" name=\"s1\" value=\"确认修改\"></FORM>";
             return inf;
         } catch (ClassNotFoundException ex) {
             return ex.toString();

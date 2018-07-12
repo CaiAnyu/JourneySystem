@@ -25,8 +25,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author 78288
  */
-public class CtrlServlet extends HttpServlet {
 
+public class CtrlServlet extends HttpServlet {
+    public static boolean isNumeric(String str){
+  for(int i=str.length();--i>=0;){
+   int chr=str.charAt(i);
+   if(chr<48 || chr>57)
+     return false;
+  }
+  return true;
+}
     webBeanLocal webBean = lookupwebBeanLocal();
 
     /**
@@ -98,6 +106,7 @@ public class CtrlServlet extends HttpServlet {
                 session.setAttribute("showticketorder", this.webBean.showticketorder());
                 session.setAttribute("showfavourite", this.webBean.showfavourite());
                  session.setAttribute("repasswordfalse", "true");
+                 session.setAttribute("repasswordfalse2", "false");
                 RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                 disp.forward(request, response);
             }
@@ -141,8 +150,16 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("usersearchticket")) {//搜票
+                //String start=new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8");
+               // String terminal=new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8");
+                //if("".equals(start.trim())&&"".equals(terminal.trim()))
+              //  {  
+                //   session.setAttribute("list",this.webBean.showallticketlist());
+             //   }else{    
                 session.setAttribute("list", this.webBean.searchticketforlist(new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("select").getBytes("iso-8859-1"), "utf-8")));
+               // }
                 RequestDispatcher disp = request.getRequestDispatcher("productlist.jsp");
+                
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("journeyaddcart")) {//买产品
@@ -177,22 +194,41 @@ public class CtrlServlet extends HttpServlet {
             }
             if (new String(request.getParameter("method")).equals("comment")) {//评论
                 String key = (String) session.getAttribute("detailkey");
-                //   out.println(key+new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
-                this.webBean.comment(key, new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
+                String comment=new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8");
+                if("".equals(comment.trim())||comment.isEmpty())
+                {
+                    session.setAttribute("productcomment", this.webBean.showcomment(key));
+                //    out.println(this.webBean.userbuyticket(request.getParameter("num")));
+                RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
+                disp.forward(request, response);
+                }else{
+                      this.webBean.comment(key, new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
                 session.setAttribute("productcomment", this.webBean.showcomment(key));
                 //    out.println(this.webBean.userbuyticket(request.getParameter("num")));
                 RequestDispatcher disp = request.getRequestDispatcher("productdetail.jsp");
                 disp.forward(request, response);
+                }
+                //   out.println(key+new String(request.getParameter("comment").getBytes("iso-8859-1"), "utf-8"));
+              
             }
 
             if (new String(request.getParameter("method")).equals("register")) {//注册
                 String name = request.getParameter("username");
+                 String Testname = request.getParameter("username");
+                  if(Testname.replaceAll("[a-z]*[A-Z]*\\d*", "").length()!=0){
+                    session.setAttribute("registerfalse", "false");
+                    RequestDispatcher disp = request.getRequestDispatcher("register.jsp");
+                    disp.forward(request, response); 
+                  }
+                  
+                  
+                  
                 String password = request.getParameter("password");
                 String repassword = request.getParameter("repassword");
                 if (name.isEmpty() || password.isEmpty() || repassword.isEmpty() || name.length() > 20 || password.length() != 8) {
                     session.setAttribute("registerfalse", "false");
                     RequestDispatcher disp = request.getRequestDispatcher("register.jsp");
-                    disp.forward(request, response);
+                    disp.forward(request, response);    
                 }
                 if (password.equals(repassword)) {
                     //   out.println(this.webBean.test());
@@ -223,6 +259,7 @@ public class CtrlServlet extends HttpServlet {
                     //   out.println(this.webBean.test());
                     if (this.webBean.repassword(password)) {
                         session.setAttribute("repasswordfalse", "true");
+                         session.setAttribute("repasswordfalse2", "true");
                         RequestDispatcher disp = request.getRequestDispatcher("usercenter.jsp");
                         disp.forward(request, response);
                     } else {
@@ -240,7 +277,7 @@ public class CtrlServlet extends HttpServlet {
 //****************************************************************************************************************************************************************
 
             if (new String(request.getParameter("method")).equals("manageproduct")) {//产品管理
-                session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                    session.setAttribute("adminindexinf", this.webBean.showallproductlist());
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                 disp.forward(request, response);
             }
@@ -378,10 +415,32 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("newproduct")) {//建立产品
-                if (this.webBean.newproduct(new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8"), request.getParameter("key"), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("detail").getBytes("iso-8859-1"), "utf-8"), request.getParameter("url"))) {
+                
+                String URL=request.getParameter("url");
+                if(URL.contains(".jpg,")&&URL.substring(URL.length()-4,URL.length()).contains(".jpg"))
+                {
+                    String name=new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+                     String type=new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8");
+                    if("".equals(name.trim())||name.isEmpty()||!type.equals("酒店")||!type.equals("旅游团"))
+                    {      session.setAttribute("newproducterror", "true");  
+                           RequestDispatcher disp = request.getRequestDispatcher("newproduct.jsp");
+                      disp.forward(request, response);
+                    }else{
+                          if (this.webBean.newproduct(new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8"), request.getParameter("key"), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("detail").getBytes("iso-8859-1"), "utf-8"), request.getParameter("url"))) {
+                     session.setAttribute("newproducterror", "false");  
+                     session.setAttribute("adminindexinf", this.webBean.showallproductlist());        
                     RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                     disp.forward(request, response);
-                } else {
+                     } else {
+                              session.setAttribute("newproducterror", "true");  
+                    RequestDispatcher disp = request.getRequestDispatcher("newproduct.jsp");
+                      disp.forward(request, response);
+                         }
+                    }
+                   
+                }
+                else {
+                    session.setAttribute("newproducterror", "true");  
                     RequestDispatcher disp = request.getRequestDispatcher("newproduct.jsp");
                     disp.forward(request, response);
                 }
@@ -391,14 +450,55 @@ public class CtrlServlet extends HttpServlet {
                 disp.forward(request, response);
             }
             if (new String(request.getParameter("method")).equals("newticket")) {//建票
-                // out.println(this.webBean.newticket(request.getParameter("key"),  new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")),  new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
-                if (this.webBean.newticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
+                try{
+                     String key=request.getParameter("key");
+                String start= new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8");
+                String terminal=new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8");
+                String type=new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8");
+                
+                
+
+
+                 if("".equals(terminal.trim())||terminal.isEmpty()||"".equals(start.trim())||start.isEmpty()||!type.equals("飞机票")||!type.equals("火车票")||!isNumeric(request.getParameter("price")))
+                 {    
+                      session.setAttribute("newticketerror", "true");
+                     RequestDispatcher disp = request.getRequestDispatcher("newticket.jsp");
+                    disp.forward(request, response); 
+                 }else{
+                        if(key.replaceAll("[a-z]*[A-Z]*\\d*", "").length()!=0||(Integer.valueOf(request.getParameter("price"))<=0))
+                 {
+                       session.setAttribute("newticketerror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("newticket.jsp");
+                    disp.forward(request, response);
+                 }else{
+                      try{
+                                 if (this.webBean.newticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
+                     session.setAttribute("adminindexinf", this.webBean.showallticketlist());       
+                       session.setAttribute("newticketerror", "false");
                     RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                     disp.forward(request, response);
                 } else {
+                            session.setAttribute("newticketerror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("newticket.jsp");
+                    disp.forward(request, response);
+                }          
+                     }catch(Exception e){
+                          session.setAttribute("newticketerror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("newticket.jsp");
+                    disp.forward(request, response);
+                     }
+         
+                }
+                 }
+                }catch(Exception e){
+                           session.setAttribute("newticketerror", "true");
                     RequestDispatcher disp = request.getRequestDispatcher("newticket.jsp");
                     disp.forward(request, response);
                 }
+           
+             
+                // out.println(this.webBean.newticket(request.getParameter("key"),  new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")),  new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
+              
             }
             if (new String(request.getParameter("method")).equals("tochangeproduct")) {//转到改产品页
                 String key = request.getParameter("num");
@@ -408,14 +508,59 @@ public class CtrlServlet extends HttpServlet {
             }
             if (new String(request.getParameter("method")).equals("changeproduct")) {//改产品
                 //  String key = request.getParameter("num");
-                if (this.webBean.changeproduct(new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8"), request.getParameter("key"), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("detail").getBytes("iso-8859-1"), "utf-8"), request.getParameter("url"))) {
-                    session.setAttribute("adminindexinf", this.webBean.showallproductlist());
+                int price=0;
+                try{
+                     price=Integer.valueOf(request.getParameter("price"));
+                }catch(Exception e){
+                    session.setAttribute("changeproducterror", "true");
+                 RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                    disp.forward(request, response);
+                }
+                
+                 //String name=new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+                 //if(name.length()>20)
+            if(price<=0||price>9999)
+            {   
+                  session.setAttribute("changeproducterror", "true");
+                 RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                    disp.forward(request, response);
+            }else{
+             String URL=request.getParameter("url");
+              if(URL.contains(".jpg,")&&URL.substring(URL.length()-4,URL.length()).contains(".jpg"))
+                {      
+                     String name=new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+                  if("".equals(name.trim())||name.isEmpty())
+                    {
+                        session.setAttribute("changeproducterror", "true");
+                           RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                      disp.forward(request, response);
+                    }else{
+                      try{
+                            if (this.webBean.changeproduct(new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8"), request.getParameter("key"), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("detail").getBytes("iso-8859-1"), "utf-8"), request.getParameter("url"))) {
+                    session.setAttribute("changeproducterror", "false");
+                              session.setAttribute("adminindexinf", this.webBean.showallproductlist());
                     RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                     disp.forward(request, response);
                 } else {
+                              session.setAttribute("changeproducterror", "true");
                     RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
                     disp.forward(request, response);
                 }
+                      }catch(Exception e){
+                           session.setAttribute("changeproducterror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                    disp.forward(request, response);
+                      }
+                        
+                  }    
+        
+                }else {
+                  session.setAttribute("changeproducterror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("changeproduct.jsp");
+                    disp.forward(request, response);
+                }   
+            }
+             
             }
            
         if (new String(request.getParameter("method")).equals("tochangeticket")) {//转到改票页
@@ -426,15 +571,44 @@ public class CtrlServlet extends HttpServlet {
         }
         if (new String(request.getParameter("method")).equals("changeticket")) {//改票
                 //  String key = request.getParameter("num");
-         //   out.println(this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
-     if (this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
-          session.setAttribute("adminindexinf", this.webBean.showallticketlist());           
+            try{
+                   int price=Integer.valueOf(request.getParameter("price"));
+                     if(price<=0||price>9999)
+            {
+                session.setAttribute("changeticketerror", "true");
+                 RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
+                    disp.forward(request, response);
+            }else{
+              String start= new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8");
+                String terminal=new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8");
+                 if("".equals(terminal.trim())||terminal.isEmpty()||"".equals(start.trim())||start.isEmpty())
+                 {
+                      session.setAttribute("changeticketerror", "true");
+                     RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
+                    disp.forward(request, response); 
+                 }else{
+                     if (this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num"))) {
+           session.setAttribute("changeticketerror", "false");
+                         session.setAttribute("adminindexinf", this.webBean.showallticketlist());           
          RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");
                     disp.forward(request, response);
                 } else {
+                          session.setAttribute("changeticketerror", "true");
                     RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
                     disp.forward(request, response);
                 }
+                 }   
+            }
+            }catch(Exception e){
+                  session.setAttribute("changeticketerror", "true");
+                    RequestDispatcher disp = request.getRequestDispatcher("changeticket.jsp");
+                    disp.forward(request, response);
+            }
+    
+       
+             
+         //   out.println(this.webBean.changeticket(request.getParameter("key"), new String(request.getParameter("start").getBytes("iso-8859-1"), "utf-8"), new String(request.getParameter("terminal").getBytes("iso-8859-1"), "utf-8"), Integer.valueOf(request.getParameter("year")), Integer.valueOf(request.getParameter("month")), Integer.valueOf(request.getParameter("date")), Integer.valueOf(request.getParameter("price")), new String(request.getParameter("type").getBytes("iso-8859-1"), "utf-8"), request.getParameter("num")));
+     
             }
         if (new String(request.getParameter("method")).equals("toadminindex")) {//去管理主页
                 RequestDispatcher disp = request.getRequestDispatcher("adminindex.jsp");

@@ -11,16 +11,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
          <style>
+              input.searchinput{
+                     width: 45px;
+                    height: 33px;
+                 
+                 }
+                 
              p.biaoqian{
              
-                font-size: 25px;
+                   font-size: 35px;
+                color: white;
                 
                 background-color: #4BAF62;
             }
              select{
-            margin-top: 7px;
-            width: 80px;
-            height:37px;
+            width: 100px;
+        height: 35px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+     margin-top: 3px;
+    margin-bottom: 3px;
+    resize: vertical;
         } 
         form{
         padding: 2px;
@@ -56,7 +69,7 @@
             input[type=submit]:hover {
             background-color: #45a049;
             }
-            input[type=text], select, textarea {
+            input[type=text], textarea {
         width: 200px;
         height: 35px;
         padding: 3px;
@@ -68,7 +81,7 @@
     resize: vertical;
         }
          </style>
-        <script type="text/javascript">
+           <script type="text/javascript">
                 function  tip6() {
                         {
                         alert("已取消");
@@ -113,7 +126,7 @@
             <input class="searchinput" type="submit" name="s3" value="搜索"><p>
             </FORM>
         </div>
-        <div style="float:left;margin-left:20px">
+        <div style="float:left;margin-left:300px">
              <FORM METHOD="post" ACTION=CtrlServlet?method=usersearchticket>    
             <select name="select">
                 <option value="飞机票">飞机票</option>
@@ -131,17 +144,20 @@
         <hr>
         
         <FORM METHOD="post" ACTION=CtrlServlet?method=repassword>    
-            重置密码: &nbsp;&nbsp;&nbsp;&nbsp;新密码： <input type="password" name="password">&nbsp;
+            修改密码: &nbsp;&nbsp;&nbsp;&nbsp;新密码： <input type="password" name="password">&nbsp;
                 再确认： <input type="password" name="repassword">&nbsp;
-            <input type="submit" name="s1" value="更改密码" >
+            <input type="submit" name="s1" value="更改密码">
                   <%if (session.getAttribute("repasswordfalse") != null) {
                 if (session.getAttribute("repasswordfalse").equals("false")) {
-                    out.println("重置失败");
+                    out.println("修改失败");
                     session.setAttribute("registerfalse", "true");
-               
                 }
-                else
-                {out.println("重置成功");}
+                 if (session.getAttribute("repasswordfalse2").equals("true")) {
+                    out.println("修改成功");
+                    session.setAttribute("registerfalse", "false");
+                     session.setAttribute("repasswordfalse2", "false");
+                }
+               
             }%>
         </FORM>
          <hr>

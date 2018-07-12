@@ -106,8 +106,8 @@
                 <h1 >注 册 用 户</h1>
         <FORM METHOD="post" ACTION=CtrlServlet?method=register>    
            <input type="text" name="username" placeholder="请输入用户名" value=''><p>
-            <input type="password" name="password" placeholder="请输入密码" value=''><p>
-            <input type="password" name="repassword"placeholder="请再输入密码"  value=''><p>
+            <input type="password" name="password" placeholder="请输入8位数字密码" value=''><p>
+            <input type="password" name="repassword"placeholder="请再次输入密码"  value=''><p>
             <input type="submit" name="s1" value="注册">
         </FORM>
         <FORM METHOD="post" ACTION=CtrlServlet?method=tologin>    

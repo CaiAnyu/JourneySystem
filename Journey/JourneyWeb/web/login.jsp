@@ -98,6 +98,8 @@
       }
     
     </style>
+     </style>
+    
     </head>
     <body>
        
@@ -108,7 +110,7 @@
                 <h1 >旅游自助系统</h1>
         <FORM METHOD="post" ACTION=CtrlServlet?method=login>    
             <input type="text" name="username" placeholder="请输入用户名"value=""><p>
-            <input type="password" name="password" placeholder="请输入密码" value=""><p>
+            <input type="password" name="password" placeholder="请输入8位数字密码" value=""><p>
    
             <INPUT type="radio" name="r" value="2" checked="checked">用户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <INPUT type="radio" name="r" value="1" >管理员<p>
@@ -121,5 +123,6 @@
         <%if (session.getAttribute("loginfalse")!=null) if (session.getAttribute("loginfalse").equals("false")) {out.println("<p>登录失败<p>");session.setAttribute("loginfalse", "true");}%>
            
             </div>  
+         
     </body>
 </html>
